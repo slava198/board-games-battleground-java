@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6c70a05-ee62-47a5-a328-fda6303482df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +33,10 @@
   <component name="ProjectId" id="1XrI1dpmJsKuq3qLPqYsmCSIENR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />

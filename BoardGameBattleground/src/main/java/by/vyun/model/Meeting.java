@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -24,7 +21,13 @@ public class Meeting {
     String location;
     LocalDateTime dateTime;
 
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_id")
     BoardGame game;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     Set<User> members;
 
 

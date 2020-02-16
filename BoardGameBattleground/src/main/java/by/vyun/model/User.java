@@ -3,12 +3,10 @@ package by.vyun.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sun.util.resources.Bundles;
+//import sun.util.resources.Bundles;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,6 +22,13 @@ public class User {
     int age;
     String location;
     double rating;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_id")
+    Set<BoardGame> gameCollection;
+
+    @ManyToMany(mappedBy = "members")
+    Set<Meeting> meetingSet;
 
 
 }
