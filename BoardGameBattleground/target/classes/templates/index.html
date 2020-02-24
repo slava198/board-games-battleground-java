@@ -11,8 +11,12 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/user/save">
-        <input name="nickname" placeholder="nickname">
+<div th:if="${error != null}" style="text-align: center">
+    <span th:text="${error}" style="background-color: lightpink; "></span>
+</div>
+
+<form method="post" action="/user/registration">
+        <input name="login" placeholder="login">
         <input name="password" placeholder="password">
         <input name ="location" placeholder="location">
         <input type="submit" value="Register">
@@ -20,6 +24,17 @@
 <!--    <button id="saveBtn">Save</button>-->
 <!--    <button id="cancelBtn">Cancel</button>-->
 </form>
+
+<form method="post" action="/user/sign_in">
+    <input name="login" placeholder="login">
+    <input name="password" placeholder="password">
+
+    <input type="submit" value="Sign in">
+
+    <!--    <button id="saveBtn">Save</button>-->
+    <!--    <button id="cancelBtn">Cancel</button>-->
+</form>
+
 
 </body>
 </html>
