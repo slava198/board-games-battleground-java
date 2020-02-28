@@ -19,6 +19,12 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     UserService userService;
 
+    @GetMapping("registrationPage")
+    public String registrationPage() {
+        return "registration";
+
+    }
+
     @PostMapping("/registration")
     public String registration(User user, Model model) {
         try {
@@ -27,44 +33,60 @@ public class UserController {
         catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
         }
-        return "index";
+        return "redirect:/";
 
     }
 
 
     @PostMapping("/update")
-    public String update(User updatedUser, Model model, HttpSession session) {
+    public String update(User changedUser, Model model, HttpSession session) {
         try {
             User currentUser = (User) session.getAttribute("user");
-            session.setAttribute("user", userService.update(currentUser, updatedUser));
+            currentUser = userService.update(currentUser, changedUser);
+            session.setAttribute("user", currentUser);
+            model.addAttribute("user", currentUser);
+            return "account";
         }
         catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
         }
-        return "account";
+        return "redirect:/";
 
     }
 
 
     @PostMapping("/sign_in")
     public String signIn(User user, HttpSession session, Model model) {
+        User signedUser = new User();
         try {
-            session.setAttribute("user", userService.signIn(user));
+            signedUser = userService.signIn(user);
+            session.setAttribute("user", signedUser);
         }
         catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
         }
+//        session.setAttribute("user", signedUser);
         model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("games", signedUser.getGameCollection());
+        model.addAttribute("meetings", signedUser.getMeetingSet());
+
         return "account";
 
     }
 
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("login");
+        session.removeAttribute("user");
         return "redirect:/";
     }
+
+    @GetMapping("/removeGameById")
+    public String removeGameById(String login, Integer id) {
+
+        userService.removeGameById(login, id);
+        return "redirect:/";
+    }
+
 
 
 

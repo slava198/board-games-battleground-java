@@ -1,5 +1,6 @@
 package by.vyun.controller;
 
+import by.vyun.service.BoardGameService;
 import by.vyun.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
 
     UserService userService;
+    BoardGameService gameService;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("games", gameService.getAllGames());
 
         return "index";
     }

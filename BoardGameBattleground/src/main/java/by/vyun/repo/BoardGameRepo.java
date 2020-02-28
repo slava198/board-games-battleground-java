@@ -1,4 +1,11 @@
 package by.vyun.repo;
 
-public interface BoardGameRepo {
+import by.vyun.model.BoardGame;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface BoardGameRepo extends JpaRepository<BoardGame, Integer> {
+
+
+
 }
