@@ -23,10 +23,16 @@ public class BoardGame {
     Integer rating = 0;
 
     public Integer getNumberOfOwners() {
+        if(owners == null) {
+            return 0;
+        }
         return owners.size();
     }
 
     public Integer getNumberOfMeetings() {
+        if(meetings == null) {
+            return 0;
+        }
         return meetings.size();
     }
 

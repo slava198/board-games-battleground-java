@@ -8,6 +8,8 @@ import by.vyun.repo.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @AllArgsConstructor
@@ -64,4 +66,9 @@ public class UserService {
         //user.getGameCollection().remove(game);
         System.out.println(user.getGameCollection().remove(game));
     }
+
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
+    }
+
 }

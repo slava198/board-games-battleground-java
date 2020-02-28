@@ -19,8 +19,8 @@ public class BoardGameService {
     }
 
 
-    public void add(BoardGame game) {
-        gameRepo.save(game);
+    public BoardGame add(BoardGame game) {
+        return gameRepo.save(game);
     }
 
     public void remove(BoardGame game) {

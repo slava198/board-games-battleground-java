@@ -1,7 +1,9 @@
 package by.vyun.controller;
 
+import by.vyun.model.BoardGame;
 import by.vyun.model.RegistrationException;
 import by.vyun.model.User;
+import by.vyun.service.BoardGameService;
 import by.vyun.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 @AllArgsConstructor
 //@NoArgsConstructor
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/admin")
+public class AdminController {
     UserService userService;
+    BoardGameService gameService;
 
     @GetMapping("registrationPage")
     public String registrationPage() {
@@ -25,15 +28,21 @@ public class UserController {
 
     }
 
-    @PostMapping("/registration")
-    public String registration(User user, Model model) {
+    @PostMapping("/add_game")
+    public String addGame(BoardGame game, Model model, HttpSession session) {
         try {
-            userService.registration(user);
+            gameService.add(game);
         }
-        catch (RegistrationException ex) {
-            model.addAttribute("error", ex.getMessage());
+        finally {
+            model.addAttribute("user", session.getAttribute("user"));
+            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("games", gameService.getAllGames());
+            return "admin_page";
         }
-        return "redirect:/";
+//        catch (RegistrationException ex) {
+//            model.addAttribute("error", ex.getMessage());
+//        }
+
 
     }
 
@@ -55,26 +64,13 @@ public class UserController {
     }
 
 
-    @PostMapping("/sign_in")
-    public String signIn(User user, HttpSession session, Model model) {
-        User signedUser = new User();
-        try {
-            signedUser = userService.signIn(user);
-            if (signedUser.getLogin().equals("admin")) {
-                session.setAttribute("user", signedUser);
-                return "redirect:/admin/sign_in";
-            }
-            session.setAttribute("user", signedUser);
-        }
-        catch (RegistrationException ex) {
-            model.addAttribute("error", ex.getMessage());
-        }
-//        session.setAttribute("user", signedUser);
-        model.addAttribute("user", session.getAttribute("user"));
-        model.addAttribute("games", signedUser.getGameCollection());
-        model.addAttribute("meetings", signedUser.getMeetingSet());
+    @GetMapping("/sign_in")
+    public String signIn(HttpSession session, Model model) {
 
-        return "account";
+        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("games", gameService.getAllGames());
+        return "admin_page";
 
     }
 
