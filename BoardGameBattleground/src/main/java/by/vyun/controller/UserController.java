@@ -1,8 +1,11 @@
 package by.vyun.controller;
 
+import by.vyun.model.BoardGame;
 import by.vyun.model.RegistrationException;
 import by.vyun.model.User;
+import by.vyun.service.BoardGameService;
 import by.vyun.service.UserService;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +21,21 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 public class UserController {
     UserService userService;
+    BoardGameService gameService;
 
-    @GetMapping("registrationPage")
+    @GetMapping("/registrationPage")
     public String registrationPage() {
         return "registration";
-
     }
+
+    @GetMapping("/gameListPage")
+    public String gameListPage(HttpSession session, Model model) {
+        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("games", gameService.getAllGames());
+        return "game_list";
+    }
+
+
 
     @PostMapping("/registration")
     public String registration(User user, Model model) {
@@ -43,8 +55,9 @@ public class UserController {
         try {
             User currentUser = (User) session.getAttribute("user");
             currentUser = userService.update(currentUser, changedUser);
-            session.setAttribute("user", currentUser);
+            //session.setAttribute("user", currentUser);
             model.addAttribute("user", currentUser);
+
             return "account";
         }
         catch (RegistrationException ex) {
@@ -71,8 +84,8 @@ public class UserController {
         }
 //        session.setAttribute("user", signedUser);
         model.addAttribute("user", session.getAttribute("user"));
-        model.addAttribute("games", signedUser.getGameCollection());
-        model.addAttribute("meetings", signedUser.getMeetingSet());
+//        model.addAttribute("games", signedUser.getGameCollection());
+//        model.addAttribute("meetings", signedUser.getMeetingSet());
 
         return "account";
 
@@ -84,11 +97,23 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/removeGameById")
-    public String removeGameById(String login, Integer id) {
+    @GetMapping("/add_game")
+    public String addGame(Integer gameId, HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        currentUser = userService.addGameToUser(gameId, currentUser);
+        model.addAttribute("user", currentUser);
+        model.addAttribute("games", gameService.getAllGames());
+        return "game_list";
+    }
 
-        userService.removeGameById(login, id);
-        return "redirect:/";
+
+
+
+    @GetMapping("/remove_game")
+    public String remove_game(Integer id, HttpSession session, Model model) {
+        User user = userService.removeGameById( ((User)(session.getAttribute("user"))).getLogin(), id);
+        model.addAttribute("user", user);
+        return "account";
     }
 
 

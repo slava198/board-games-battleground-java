@@ -23,8 +23,9 @@ public class BoardGameService {
         return gameRepo.save(game);
     }
 
-    public void remove(BoardGame game) {
-        gameRepo.delete(game);
+    public void removeGameById(Integer id) {
+        gameRepo.deleteById(id);
     }
+
 
 }

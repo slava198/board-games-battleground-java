@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6c70a05-ee62-47a5-a328-fda6303482df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/repo/BoardGameRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/repo/BoardGameRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/BoardGameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/BoardGameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin_page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,8 +54,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -156,7 +160,8 @@
       <workItem from="1582655384696" duration="8129000" />
       <workItem from="1582727730726" duration="9538000" />
       <workItem from="1582812080545" duration="9191000" />
-      <workItem from="1582884096234" duration="18816000" />
+      <workItem from="1582884096234" duration="19058000" />
+      <workItem from="1582964064629" duration="15344000" />
     </task>
     <servers />
   </component>
@@ -175,16 +180,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

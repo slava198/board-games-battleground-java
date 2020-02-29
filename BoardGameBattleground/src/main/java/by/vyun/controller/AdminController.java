@@ -5,6 +5,7 @@ import by.vyun.model.RegistrationException;
 import by.vyun.model.User;
 import by.vyun.service.BoardGameService;
 import by.vyun.service.UserService;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,10 +82,14 @@ public class AdminController {
     }
 
     @GetMapping("/removeGameById")
-    public String removeGameById(String login, Integer id) {
+    public String removeGameById(Integer id, HttpSession session, Model model) {
 
-        userService.removeGameById(login, id);
-        return "redirect:/";
+        gameService.removeGameById(id);
+
+        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("games", gameService.getAllGames());
+        return "admin_page";
     }
 
 

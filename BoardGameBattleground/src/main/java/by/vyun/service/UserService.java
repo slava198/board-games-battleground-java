@@ -56,19 +56,21 @@ public class UserService {
     }
 
 
-    public void removeGameById(String login, Integer gameId) {
+    public User removeGameById(String login, Integer gameId) {
         User user = userRepo.getFirstByLogin(login);
         BoardGame game = gameRepo.getOne(gameId);
-
         user.getGameCollection().remove(game);
-        userRepo.save(user);
-
-        //user.getGameCollection().remove(game);
-        System.out.println(user.getGameCollection().remove(game));
+        return userRepo.save(user);
     }
 
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
 
+    public User addGameToUser(Integer gameId, User currentUser) {
+        BoardGame game = gameRepo.getFirstById(gameId);
+        currentUser.addGameToCollection(game);
+        return userRepo.save(currentUser);
+
+    }
 }
