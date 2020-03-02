@@ -8,5 +8,6 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 
     //List<User> getAll();
     User getFirstByLogin(String login);
+    User getFirstById(Integer id);
 
 }

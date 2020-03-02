@@ -41,7 +41,8 @@ public class User {
     }
 
 
-    public void deleteGameById(Integer id) {
+    public void deleteGameFromCollection(BoardGame game) {
+        gameCollection.remove(game);
 
     }
 

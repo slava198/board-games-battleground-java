@@ -55,7 +55,7 @@ public class UserController {
         try {
             User currentUser = (User) session.getAttribute("user");
             currentUser = userService.update(currentUser, changedUser);
-            //session.setAttribute("user", currentUser);
+            session.setAttribute("user", currentUser);
             model.addAttribute("user", currentUser);
 
             return "account";
@@ -73,23 +73,20 @@ public class UserController {
         User signedUser = new User();
         try {
             signedUser = userService.signIn(user);
+            session.setAttribute("user", signedUser);
+            session.setAttribute("userId", signedUser.getId());
             if (signedUser.getLogin().equals("admin")) {
-                session.setAttribute("user", signedUser);
                 return "redirect:/admin/sign_in";
             }
-            session.setAttribute("user", signedUser);
         }
         catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
         }
-//        session.setAttribute("user", signedUser);
         model.addAttribute("user", session.getAttribute("user"));
-//        model.addAttribute("games", signedUser.getGameCollection());
-//        model.addAttribute("meetings", signedUser.getMeetingSet());
-
         return "account";
 
     }
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -97,29 +94,32 @@ public class UserController {
         return "redirect:/";
     }
 
+
     @GetMapping("/add_game")
     public String addGame(Integer gameId, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
         currentUser = userService.addGameToUser(gameId, currentUser);
+        session.setAttribute("user", currentUser);
         model.addAttribute("user", currentUser);
         model.addAttribute("games", gameService.getAllGames());
         return "game_list";
     }
 
-
-
-
     @GetMapping("/remove_game")
-    public String remove_game(Integer id, HttpSession session, Model model) {
-        User user = userService.removeGameById( ((User)(session.getAttribute("user"))).getLogin(), id);
+    public String removeGame(Integer gameId, HttpSession session, Model model) {
+        User user = userService.removeGameById( ((User)(session.getAttribute("user"))).getLogin(), gameId);
+        session.setAttribute("user", user);
         model.addAttribute("user", user);
         return "account";
     }
 
 
-
-
-
+    @GetMapping("/back")
+    public String back(HttpSession session, Model model) {
+        session.setAttribute("user", userService.getUserById((Integer) session.getAttribute("userId")));
+        model.addAttribute("user", session.getAttribute("user"));
+        return "account";
+    }
 
 
 }

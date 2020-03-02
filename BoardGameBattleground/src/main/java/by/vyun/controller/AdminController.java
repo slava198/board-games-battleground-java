@@ -85,7 +85,7 @@ public class AdminController {
     public String removeGameById(Integer id, HttpSession session, Model model) {
 
         gameService.removeGameById(id);
-
+        session.setAttribute("games", gameService.getAllGames());
         model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("games", gameService.getAllGames());

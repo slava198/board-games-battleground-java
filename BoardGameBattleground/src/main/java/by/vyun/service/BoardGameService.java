@@ -24,7 +24,11 @@ public class BoardGameService {
     }
 
     public void removeGameById(Integer id) {
-        gameRepo.deleteById(id);
+        BoardGame game = gameRepo.getOne(id);
+        game.clearOwnersList();
+        gameRepo.save(game);
+        //gameRepo.deleteById(id);
+        gameRepo.delete(game);
     }
 
 

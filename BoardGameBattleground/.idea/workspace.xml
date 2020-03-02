@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6c70a05-ee62-47a5-a328-fda6303482df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" afterDir="false" />
+    <list default="true" id="e6c70a05-ee62-47a5-a328-fda6303482df" name="Default Changelist" comment="fixed bugs from previous commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/repo/BoardGameRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/repo/BoardGameRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/repo/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/repo/UserRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/BoardGameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/BoardGameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin_page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,6 +95,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
   </component>
   <component name="RecentsManager">
@@ -162,6 +162,9 @@
       <workItem from="1582812080545" duration="9191000" />
       <workItem from="1582884096234" duration="19058000" />
       <workItem from="1582964064629" duration="15344000" />
+      <workItem from="1583014776085" duration="327000" />
+      <workItem from="1583048114178" duration="7076000" />
+      <workItem from="1583181063973" duration="8732000" />
     </task>
     <servers />
   </component>
@@ -180,5 +183,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed bugs from previous commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs from previous commit" />
   </component>
 </project>

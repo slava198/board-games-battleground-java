@@ -18,6 +18,10 @@ public class UserService {
     UserRepo userRepo;
     BoardGameRepo gameRepo;
 
+    public User getUserById(Integer id) {
+        return userRepo.getFirstById(id);
+    }
+
     public User registration(User user) throws RegistrationException {
 
         if (user.getLogin().trim().length() * user.getPassword().trim().length() * user.getLocation().trim().length() == 0) {
@@ -39,32 +43,22 @@ public class UserService {
             throw new RegistrationException("Invalid password!!!");
         }
         return foundedUser;
-
     }
 
 
     public User update(User currentUser, User changedUser) throws RegistrationException {
-
             currentUser.setLocation(changedUser.getLocation());
             currentUser.setAge(changedUser.getAge());
             currentUser.setPassword(changedUser.getPassword());
             return userRepo.save(currentUser);
-
-
-
-     //       return userRepo.save(changedUser);
     }
 
 
     public User removeGameById(String login, Integer gameId) {
         User user = userRepo.getFirstByLogin(login);
         BoardGame game = gameRepo.getOne(gameId);
-        user.getGameCollection().remove(game);
+        user.deleteGameFromCollection(game);
         return userRepo.save(user);
-    }
-
-    public List<User> getAllUsers() {
-        return userRepo.findAll();
     }
 
     public User addGameToUser(Integer gameId, User currentUser) {
@@ -73,4 +67,9 @@ public class UserService {
         return userRepo.save(currentUser);
 
     }
+
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
+    }
+
 }

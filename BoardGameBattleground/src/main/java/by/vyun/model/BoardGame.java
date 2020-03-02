@@ -36,11 +36,22 @@ public class BoardGame {
         return meetings.size();
     }
 
-    @ManyToMany(mappedBy = "gameCollection")
+//    @ManyToMany(mappedBy = "gameCollection")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "games_owners",
+        joinColumns = {@JoinColumn(name = "game_id")},
+        inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
     Set<User> owners;
 
     @OneToMany(mappedBy = "game")
     Set<Meeting> meetings;
+
+    public void clearOwnersList() {
+        owners.clear();
+
+    }
 
 
 
