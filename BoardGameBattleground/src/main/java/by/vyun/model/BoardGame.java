@@ -1,5 +1,6 @@
 package by.vyun.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -43,6 +44,7 @@ public class BoardGame {
         joinColumns = {@JoinColumn(name = "game_id")},
         inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
+    @JsonBackReference
     Set<User> owners;
 
     @OneToMany(mappedBy = "game")

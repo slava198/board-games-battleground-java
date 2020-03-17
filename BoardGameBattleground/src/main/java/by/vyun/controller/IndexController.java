@@ -1,6 +1,7 @@
 package by.vyun.controller;
 
 import by.vyun.service.BoardGameService;
+import by.vyun.service.MeetingService;
 import by.vyun.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,12 @@ public class IndexController {
 
     UserService userService;
     BoardGameService gameService;
+    MeetingService meetingService;
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("games", gameService.getAllGames());
+        model.addAttribute("meetings", meetingService.getAllMeetings());
 
         return "index";
     }

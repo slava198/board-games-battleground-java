@@ -1,7 +1,7 @@
 package by.vyun.controller;
 
 import by.vyun.model.BoardGame;
-import by.vyun.model.RegistrationException;
+import by.vyun.exception.RegistrationException;
 import by.vyun.model.User;
 import by.vyun.service.BoardGameService;
 import by.vyun.service.UserService;

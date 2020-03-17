@@ -1,5 +1,6 @@
 package by.vyun.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 //import sun.util.resources.Bundles;
 
@@ -31,15 +32,21 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "game_id")}
     )
+    @JsonManagedReference
     List<BoardGame> gameCollection;
 
-    @ManyToMany(mappedBy = "members")
-    Set<Meeting> meetingSet;
+    @ManyToMany
+    @JoinTable(
+            name = "meetings_members",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "meeting_id")}
+    )
+    List<Meeting> meetingSet;
+
 
     public void addGameToCollection(BoardGame game) {
         gameCollection.add(game);
     }
-
 
     public void deleteGameFromCollection(BoardGame game) {
         gameCollection.remove(game);

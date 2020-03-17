@@ -1,4 +1,4 @@
-package by.vyun.model;
+package by.vyun.exception;
 
 public class RegistrationException extends Exception {
 

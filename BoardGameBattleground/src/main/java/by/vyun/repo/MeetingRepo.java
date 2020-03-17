@@ -1,4 +1,12 @@
 package by.vyun.repo;
 
-public interface MeetingService {
+import by.vyun.model.Meeting;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MeetingRepo extends JpaRepository<Meeting, Integer> {
+
+    Meeting getTopById(int id);
+
+
+
 }

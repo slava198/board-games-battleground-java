@@ -1,7 +1,7 @@
 package by.vyun.service;
 
 import by.vyun.model.BoardGame;
-import by.vyun.model.RegistrationException;
+import by.vyun.exception.RegistrationException;
 import by.vyun.model.User;
 import by.vyun.repo.BoardGameRepo;
 import by.vyun.repo.UserRepo;
@@ -45,12 +45,26 @@ public class UserService {
         return foundedUser;
     }
 
+    public User signIn(String login, String password) throws RegistrationException {
+        User foundedUser = userRepo.getFirstByLogin(login);
+        if (foundedUser == null) {
+            throw new RegistrationException("Login not founded!!!");
+        }
+        if (!password.equals(foundedUser.getPassword())) {
+            throw new RegistrationException("Invalid password!!!");
+        }
+        return foundedUser;
+    }
 
-    public User update(User currentUser, User changedUser) throws RegistrationException {
+
+
+    public User update(int id, User changedUser) throws RegistrationException {
+            User currentUser = userRepo.getFirstById(id);
             currentUser.setLocation(changedUser.getLocation());
             currentUser.setAge(changedUser.getAge());
             currentUser.setPassword(changedUser.getPassword());
-            return userRepo.save(currentUser);
+            return userRepo.saveAndFlush(currentUser);
+
     }
 
 
@@ -58,15 +72,29 @@ public class UserService {
         User user = userRepo.getFirstByLogin(login);
         BoardGame game = gameRepo.getOne(gameId);
         user.deleteGameFromCollection(game);
-        return userRepo.save(user);
+        return userRepo.saveAndFlush(user);
     }
 
     public User addGameToUser(Integer gameId, User currentUser) {
         BoardGame game = gameRepo.getFirstById(gameId);
-        currentUser.addGameToCollection(game);
-        return userRepo.save(currentUser);
-
+        if (!currentUser.getGameCollection().contains(game)) {
+            currentUser.addGameToCollection(game);
+        }
+        return userRepo.saveAndFlush(currentUser);
     }
+
+    public List<BoardGame> getUnsubscribedGames(User currentUser) {
+//        List<BoardGame> unsubscribedGames = new ArrayList<>();
+        List<BoardGame> allGames = gameRepo.findAll();
+        for (BoardGame game : currentUser.getGameCollection()) {
+            if (allGames.contains(game)) {
+                allGames.remove(game);
+            }
+        }
+        return allGames;
+    }
+
+
 
     public List<User> getAllUsers() {
         return userRepo.findAll();

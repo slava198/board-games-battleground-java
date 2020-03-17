@@ -1,7 +1,6 @@
 package by.vyun.controller;
 
-import by.vyun.model.BoardGame;
-import by.vyun.model.RegistrationException;
+import by.vyun.exception.RegistrationException;
 import by.vyun.model.User;
 import by.vyun.service.BoardGameService;
 import by.vyun.service.UserService;
@@ -31,11 +30,9 @@ public class UserController {
     @GetMapping("/gameListPage")
     public String gameListPage(HttpSession session, Model model) {
         model.addAttribute("user", session.getAttribute("user"));
-        model.addAttribute("games", gameService.getAllGames());
+        model.addAttribute("games", userService.getUnsubscribedGames((User) session.getAttribute("user")));
         return "game_list";
     }
-
-
 
     @PostMapping("/registration")
     public String registration(User user, Model model) {
@@ -54,7 +51,7 @@ public class UserController {
     public String update(User changedUser, Model model, HttpSession session) {
         try {
             User currentUser = (User) session.getAttribute("user");
-            currentUser = userService.update(currentUser, changedUser);
+            currentUser = userService.update(currentUser.getId(), changedUser);
             session.setAttribute("user", currentUser);
             model.addAttribute("user", currentUser);
 
@@ -70,7 +67,7 @@ public class UserController {
 
     @PostMapping("/sign_in")
     public String signIn(User user, HttpSession session, Model model) {
-        User signedUser = new User();
+        User signedUser;
         try {
             signedUser = userService.signIn(user);
             session.setAttribute("user", signedUser);
@@ -101,7 +98,7 @@ public class UserController {
         currentUser = userService.addGameToUser(gameId, currentUser);
         session.setAttribute("user", currentUser);
         model.addAttribute("user", currentUser);
-        model.addAttribute("games", gameService.getAllGames());
+        model.addAttribute("games", userService.getUnsubscribedGames((User) session.getAttribute("user")));
         return "game_list";
     }
 
@@ -113,13 +110,15 @@ public class UserController {
         return "account";
     }
 
-
     @GetMapping("/back")
     public String back(HttpSession session, Model model) {
         session.setAttribute("user", userService.getUserById((Integer) session.getAttribute("userId")));
         model.addAttribute("user", session.getAttribute("user"));
         return "account";
     }
+
+
+
 
 
 }
