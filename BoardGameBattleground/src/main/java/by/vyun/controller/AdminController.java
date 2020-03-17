@@ -52,7 +52,7 @@ public class AdminController {
     public String update(User changedUser, Model model, HttpSession session) {
         try {
             User currentUser = (User) session.getAttribute("user");
-            currentUser = userService.update(currentUser, changedUser);
+            currentUser = userService.update(currentUser.getId(), changedUser);
             session.setAttribute("user", currentUser);
             model.addAttribute("user", currentUser);
             return "account";

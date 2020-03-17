@@ -1,12 +1,12 @@
 package by.vyun.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-//import sun.util.resources.Bundles;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Data
@@ -41,6 +41,7 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "meeting_id")}
     )
+    @JsonBackReference
     List<Meeting> meetingSet;
 
 
