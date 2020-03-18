@@ -130,6 +130,7 @@ public class UserController {
         User currentUser = (User) session.getAttribute("user");
         meet.setGame(gameService.getGameById(gameId));
         meetingService.createMeet(currentUser, meet);
+        userService.takePartInMeeting(currentUser.getId(), meet.getId());
         session.setAttribute("user", currentUser);
         model.addAttribute("user", currentUser);
         return "account";

@@ -1,7 +1,6 @@
 package by.vyun.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +12,9 @@ import java.util.List;
 @EqualsAndHashCode(exclude = {"gameCollection", "meetingSet"})
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.IntSequenceGenerator.class,
+        property = "@userId")
 public class User {
 
     @Id
@@ -25,13 +27,14 @@ public class User {
     Integer rating = 0;
     //    @JoinColumn(name = "game_id")
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "games_owners",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "game_id")}
     )
-    @JsonManagedReference
+    //@JsonManagedReference
+
     List<BoardGame> gameCollection;
 
     @ManyToMany
@@ -40,8 +43,11 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "meeting_id")}
     )
-    @JsonBackReference
+    //@JsonBackReference
     List<Meeting> meetingSet;
+
+
+
 
 
     public void addGameToCollection(BoardGame game) {

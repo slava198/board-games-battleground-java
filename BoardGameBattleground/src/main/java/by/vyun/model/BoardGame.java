@@ -1,6 +1,9 @@
 package by.vyun.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +15,9 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString(exclude = {"owners", "meetings"})
 @EqualsAndHashCode(exclude = {"owners", "meetings"})
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.IntSequenceGenerator.class,
+        property = "@boardGameId")
 public class BoardGame {
 
     @Id
@@ -38,16 +44,17 @@ public class BoardGame {
     }
 
 //    @ManyToMany(mappedBy = "gameCollection")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "games_owners",
         joinColumns = {@JoinColumn(name = "game_id")},
         inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
-    @JsonBackReference
+    //@JsonBackReference
     Set<User> owners;
 
     @OneToMany(mappedBy = "game")
+    //@JsonManagedReference
     Set<Meeting> meetings;
 
     public void clearOwnersList() {

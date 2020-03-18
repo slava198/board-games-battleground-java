@@ -97,7 +97,7 @@ public class UserService {
         return allGames;
     }
 
-    public void createMeet(){};
+    public void createMeet() {};
 
     public User takePartInMeeting(int userId, int meetingId) {
         User currentUser = userRepo.getFirstById(userId);
