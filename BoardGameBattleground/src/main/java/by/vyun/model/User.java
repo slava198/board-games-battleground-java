@@ -34,10 +34,9 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "game_id")}
     )
     //@JsonManagedReference
-
     List<BoardGame> gameCollection;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "meetings_members",
             joinColumns = {@JoinColumn(name = "user_id")},

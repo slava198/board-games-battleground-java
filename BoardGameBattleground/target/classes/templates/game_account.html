@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${error != null}" style="text-align: center">
+    <span th:text="${error}" style="background-color: lightpink; "></span>
+</div>
+<div th:if="${error == null}">
+    <table>
+        <tr>
+<!--            <td id="column_1">-->
+<!--                <h1 th:text="${user.login}"></h1>-->
+<!--                <a href="/user/logout">Exit</a>-->
+
+
+<!--                <form method="post" action="/user/update">-->
+<!--                    <div>-->
+<!--                        <p>Password: <input name="password" th:value="${user.password}"></p>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <p>Location: <input name="location" th:value="${user.location}"></p>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <p>Age: <input name="age" th:value="${user.age}"></p>-->
+<!--                    </div>-->
+<!--                    <input type="submit" value="Update">-->
+<!--                    &lt;!&ndash;    <button id="saveBtn">Save</button>&ndash;&gt;-->
+<!--                    &lt;!&ndash;    <button id="cancelBtn">Cancel</button>&ndash;&gt;-->
+<!--                </form>-->
+<!--            </td>-->
+            <td id="column_2">
+                <div>
+                    <h1>Game detales</h1>
+<!--                    <form method="get" action="/user/gameListPage">-->
+<!--                        <input type="submit" value="Add games">-->
+<!--                    </form>-->
+                    <h4 th:text="${game.getTitle()}"></h4>
+                    <h4 th:text="${game.getDescription()}"></h4>
+                    <h4 th:text="${game.getNumberOfMeetings()}"></h4>
+                    <h4 th:text="${game.getNumberOfOwners()}"></h4>
+                </div>
+            </td>
+            <td id="column_3">
+                <div>
+                    <h1>Meetings</h1>
+<!--                    <form method="get" action="/user/add_meeting">-->
+<!--                        <input type="submit" value="Add meeting">-->
+<!--                    </form>-->
+                    <table>
+                        <tr>
+
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Members</th>
+                            <th>Leave</th>
+
+                        </tr>
+                        <th:block th:each="meeting : ${game.getMeetings()}">
+                            <tr>
+                                <td th:text="${meeting.getCreator().getLogin()}" height="16px"></td>
+                                <td th:text="${meeting.getLocation()}" height="16px"></td>
+                                <td th:text="${meeting.getDateTime()}" align="right"></td>
+                                <td th:text="${meeting.getNumberOfMembers()}" align="right"></td>
+                                <td><a th:href="@{/user/add_meet(meetId = ${meeting.id})}">Take part</a></td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+</body>
+</html>

@@ -114,6 +114,17 @@ public class UserController {
         return "account";
     }
 
+    @GetMapping("/see_game")
+    public String seeGame(Integer gameId, HttpSession session, Model model) {
+        //User user = userService.removeGameById( ((User)(session.getAttribute("user"))).getLogin(), gameId);
+        BoardGame game = gameService.getGameById(gameId);
+        //session.setAttribute("user", user);
+        model.addAttribute("game", game);
+        return "game_account";
+    }
+
+
+
     @GetMapping("/create_meet")
     public String createMeet(int gameId, Model model) {
         BoardGame game = gameService.getGameById(gameId);
@@ -126,20 +137,29 @@ public class UserController {
     }
 
     @PostMapping("/new_meet")
-    public String addMeeting(Meeting meet, int gameId, HttpSession session, Model model) {
+    public String newMeeting(Meeting meet, int gameId, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
         meet.setGame(gameService.getGameById(gameId));
         meetingService.createMeet(currentUser, meet);
-        userService.takePartInMeeting(currentUser.getId(), meet.getId());
+        currentUser = userService.takePartInMeeting(currentUser.getId(), meet.getId());
         session.setAttribute("user", currentUser);
         model.addAttribute("user", currentUser);
         return "account";
     }
 
-    @GetMapping("/remove_meet")
-    public String removeMeeting(int meetingId, HttpSession session, Model model) {
+    @GetMapping("/add_meet")
+    public String addMeeting(int meetId, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
-        currentUser = userService.leaveMeeting(currentUser.getId(), meetingId);
+        currentUser = userService.takePartInMeeting(currentUser.getId(), meetId);
+        session.setAttribute("user", currentUser);
+        model.addAttribute("game", meetingService.getMeetingById(meetId).getGame());
+        return "game_account";
+    }
+
+    @GetMapping("/leave_meet")
+    public String leaveMeeting(int meetId, HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        currentUser = userService.leaveMeeting(currentUser.getId(), meetId);
         session.setAttribute("user", currentUser);
         model.addAttribute("user", currentUser);
         return "account";

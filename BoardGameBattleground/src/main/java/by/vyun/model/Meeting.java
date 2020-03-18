@@ -51,6 +51,12 @@ public class Meeting {
     )
     //@JsonManagedReference
     List<User> members;
+    public int getNumberOfMembers() {
+        if(members == null) {
+            return 0;
+        }
+        return members.size();
+    }
 
 
 

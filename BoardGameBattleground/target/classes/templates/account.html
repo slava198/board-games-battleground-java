@@ -60,7 +60,8 @@
                                 <td th:text="${game.getRating()}" align="right"></td>
                                 <td th:text="${game.getNumberOfOwners()}" align="right"></td>
                                 <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
-                                <td><a th:href="@{/user/remove_game(gameId = ${game.id})}">Delete</a></td>
+                                <td><a th:href="@{/user/see_game(gameId = ${game.id})}">See more...</a></td>
+                                <td><a th:href="@{/user/remove_game(gameId = ${game.id})}">Remove</a></td>
                                 <td><a th:href="@{/user/create_meet(gameId = ${game.id})}">Create meet</a></td>
                             </tr>
                         </th:block>
@@ -81,6 +82,7 @@
                             <th>Location</th>
                             <th>Date</th>
                             <th>Members</th>
+                            <th>Leave</th>
 
                         </tr>
                         <th:block th:each="meeting : ${user.getMeetingSet()}">
@@ -88,8 +90,8 @@
                                 <td th:text="${meeting.getGame().getTitle()}" height="30px"></td>
                                 <td th:text="${meeting.getLocation()}" height="16px"></td>
                                 <td th:text="${meeting.getDateTime()}" align="right"></td>
-                                <td th:text="${meeting.getMembers().size()}" align="right"></td>
-<!--                                <td><a th:href="@{/user/remove_game(gameId = ${meeting.id})}">Delete</a></td>-->
+                                <td th:text="${meeting.getNumberOfMembers()}" align="right"></td>
+                                <td><a th:href="@{/user/leave_meet(meetId = ${meeting.id})}">Delete</a></td>
                             </tr>
                         </th:block>
                     </table>
