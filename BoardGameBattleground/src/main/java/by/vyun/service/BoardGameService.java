@@ -18,6 +18,10 @@ public class BoardGameService {
         return gameRepo.findAll();
     }
 
+    public BoardGame getGameById(int id) {
+        return gameRepo.getFirstById(id);
+    }
+
 
     public BoardGame add(BoardGame game) {
         return gameRepo.save(game);

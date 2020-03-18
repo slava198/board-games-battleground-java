@@ -15,15 +15,24 @@ import java.util.List;
 @AllArgsConstructor
 @ToString(exclude = {"members"})
 @EqualsAndHashCode(exclude = {"members"})
+
 public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String location;
-    LocalDateTime dateTime;
+    String dateTime;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "meet_creators",
+            joinColumns = {@JoinColumn(name = "meet_id")},
+            inverseJoinColumns = {@JoinColumn(name = "creator_id")}
+    )
+    User creator;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "game_id")
     BoardGame game;
 

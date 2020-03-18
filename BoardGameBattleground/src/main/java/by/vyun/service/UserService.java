@@ -2,8 +2,10 @@ package by.vyun.service;
 
 import by.vyun.model.BoardGame;
 import by.vyun.exception.RegistrationException;
+import by.vyun.model.Meeting;
 import by.vyun.model.User;
 import by.vyun.repo.BoardGameRepo;
+import by.vyun.repo.MeetingRepo;
 import by.vyun.repo.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ public class UserService {
 
     UserRepo userRepo;
     BoardGameRepo gameRepo;
+    MeetingRepo meetingRepo;
 
     public User getUserById(Integer id) {
         return userRepo.getFirstById(id);
@@ -68,14 +71,14 @@ public class UserService {
     }
 
 
-    public User removeGameById(String login, Integer gameId) {
+    public User removeGameById(String login, int gameId) {
         User user = userRepo.getFirstByLogin(login);
         BoardGame game = gameRepo.getOne(gameId);
         user.deleteGameFromCollection(game);
         return userRepo.saveAndFlush(user);
     }
 
-    public User addGameToUser(Integer gameId, User currentUser) {
+    public User addGameToUser(int gameId, User currentUser) {
         BoardGame game = gameRepo.getFirstById(gameId);
         if (!currentUser.getGameCollection().contains(game)) {
             currentUser.addGameToCollection(game);
@@ -93,6 +96,24 @@ public class UserService {
         }
         return allGames;
     }
+
+    public void createMeet(){};
+
+    public User takePartInMeeting(int userId, int meetingId) {
+        User currentUser = userRepo.getFirstById(userId);
+        currentUser.addMeeting(meetingRepo.getFirstById(meetingId));
+        return userRepo.saveAndFlush(currentUser);
+    }
+
+    public User leaveMeeting(int userId, int meetingId) {
+        User currentUser = userRepo.getFirstById(userId);
+        currentUser.deleteMeeting(meetingRepo.getFirstById(meetingId));
+        return userRepo.saveAndFlush(currentUser);
+    }
+
+    //public Meeting createMeeting()
+
+
 
 
 

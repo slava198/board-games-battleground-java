@@ -3,7 +3,6 @@ package by.vyun.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -54,6 +53,13 @@ public class User {
 
     }
 
+    public void addMeeting(Meeting meeting) {
+        meetingSet.add(meeting);
+    }
 
+    public void deleteMeeting(Meeting meeting) {
+        meetingSet.remove(meeting);
+
+    }
 
 }

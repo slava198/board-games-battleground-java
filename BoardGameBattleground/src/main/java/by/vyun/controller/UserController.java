@@ -1,8 +1,11 @@
 package by.vyun.controller;
 
 import by.vyun.exception.RegistrationException;
+import by.vyun.model.BoardGame;
+import by.vyun.model.Meeting;
 import by.vyun.model.User;
 import by.vyun.service.BoardGameService;
+import by.vyun.service.MeetingService;
 import by.vyun.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     UserService userService;
     BoardGameService gameService;
+    MeetingService meetingService;
 
     @GetMapping("/registrationPage")
     public String registrationPage() {
@@ -109,6 +113,37 @@ public class UserController {
         model.addAttribute("user", user);
         return "account";
     }
+
+    @GetMapping("/create_meet")
+    public String createMeet(int gameId, Model model) {
+        BoardGame game = gameService.getGameById(gameId);
+//        User currentUser = (User) session.getAttribute("user");
+//        currentUser = userService.takePartInMeeting(currentUser.getId(), meetingId);
+//        session.setAttribute("user", currentUser);
+//        model.addAttribute("user", currentUser);
+        model.addAttribute("game", game);
+        return "meet_create";
+    }
+
+    @PostMapping("/new_meet")
+    public String addMeeting(Meeting meet, int gameId, HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        meet.setGame(gameService.getGameById(gameId));
+        meetingService.createMeet(currentUser, meet);
+        session.setAttribute("user", currentUser);
+        model.addAttribute("user", currentUser);
+        return "account";
+    }
+
+    @GetMapping("/remove_meet")
+    public String removeMeeting(int meetingId, HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        currentUser = userService.leaveMeeting(currentUser.getId(), meetingId);
+        session.setAttribute("user", currentUser);
+        model.addAttribute("user", currentUser);
+        return "account";
+    }
+
 
     @GetMapping("/back")
     public String back(HttpSession session, Model model) {

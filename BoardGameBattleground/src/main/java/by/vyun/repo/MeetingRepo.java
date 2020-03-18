@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MeetingRepo extends JpaRepository<Meeting, Integer> {
 
-    Meeting getTopById(int id);
+    Meeting getFirstById(int id);
+
 
 
 
