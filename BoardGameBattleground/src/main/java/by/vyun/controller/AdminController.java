@@ -81,16 +81,17 @@ public class AdminController {
         return "redirect:/";
     }
 
-    @GetMapping("/removeGameById")
-    public String removeGameById(Integer id, HttpSession session, Model model) {
-
-        gameService.removeGameById(id);
+    @GetMapping("/changeGameStatusById")
+    public String changeGameStatusById(Integer id, HttpSession session, Model model) {
+        gameService.changeGameStatusById(id);
         session.setAttribute("games", gameService.getAllGames());
         model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("games", gameService.getAllGames());
         return "admin_page";
     }
+
+
 
 
 

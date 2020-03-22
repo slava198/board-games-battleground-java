@@ -27,12 +27,12 @@ public class BoardGameService {
         return gameRepo.save(game);
     }
 
-    public void removeGameById(Integer id) {
+    public void changeGameStatusById(Integer id) {
         BoardGame game = gameRepo.getOne(id);
-        game.clearOwnersList();
-        gameRepo.save(game);
+        game.setActive(!game.isActive());
+        gameRepo.saveAndFlush(game);
         //gameRepo.deleteById(id);
-        gameRepo.delete(game);
+        //gameRepo.delete(game);
     }
 
 

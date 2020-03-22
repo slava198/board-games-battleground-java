@@ -50,8 +50,9 @@
                             <th>Rating</th>
                             <th>Owners</th>
                             <th>Meetings</th>
-                            <th>Delete</th>
-                            <th>Create meet</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         <th:block th:each="game : ${user.getGameCollection()}">
                             <tr>
@@ -91,7 +92,33 @@
                                 <td th:text="${meeting.getLocation()}" height="16px"></td>
                                 <td th:text="${meeting.getDateTime()}" align="right"></td>
                                 <td th:text="${meeting.getNumberOfMembers()}" align="right"></td>
-                                <td><a th:href="@{/user/leave_meet(meetId = ${meeting.id})}">Delete</a></td>
+                                <td><a th:href="@{/user/leave_meet(meetId = ${meeting.id})}">Leave</a></td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+
+            </td>
+            <td id="column_4">
+                <div>
+                    <h1>My created meetings</h1>
+                    <table>
+                        <tr>
+
+                            <th>Title</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Members</th>
+                            <th>Delete</th>
+
+                        </tr>
+                        <th:block th:each="meeting : ${user.getCreatedMeets()}">
+                            <tr>
+                                <td th:text="${meeting.getGame().getTitle()}" height="30px"></td>
+                                <td th:text="${meeting.getLocation()}" height="16px"></td>
+                                <td th:text="${meeting.getDateTime()}" align="right"></td>
+                                <td th:text="${meeting.getNumberOfMembers()}" align="right"></td>
+                                <td><a th:href="@{/user/delete_meet(meetId = ${meeting.id})}">Delete</a></td>
                             </tr>
                         </th:block>
                     </table>

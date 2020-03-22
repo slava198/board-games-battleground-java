@@ -31,7 +31,6 @@
 <!--<a href="registration.html">Registration</a>-->
 <div>
     <table>
-        <th:block th:each="game : ${games}">
             <tr>
                 <th></th>
                 <th>Title</th>
@@ -39,7 +38,8 @@
                 <!--            <th>Owners</th>-->
                 <!--            <th>Meetings</th>-->
             </tr>
-            <tr>
+        <th:block th:each="game : ${games}">
+            <tr th:if="${game.isActive()}">
                 <td><img th:src="${game.getLogo()}" height="30px"></td>
                 <td th:text="${game.getTitle()}" height="16px"></td>
                 <td th:text="${game.getRating()}" align="right"></td>

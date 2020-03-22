@@ -10,6 +10,7 @@ import by.vyun.repo.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -101,7 +102,10 @@ public class UserService {
 
     public User takePartInMeeting(int userId, int meetingId) {
         User currentUser = userRepo.getFirstById(userId);
-        currentUser.addMeeting(meetingRepo.getFirstById(meetingId));
+        Meeting meeting = meetingRepo.getFirstById(meetingId);
+        if (!currentUser.getMeetingSet().contains(meeting)) {
+            currentUser.addMeeting(meeting);
+        }
         return userRepo.saveAndFlush(currentUser);
     }
 
@@ -111,7 +115,16 @@ public class UserService {
         return userRepo.saveAndFlush(currentUser);
     }
 
-    //public Meeting createMeeting()
+    public List<Meeting> getCreatedMeets(User currentUser) {
+//        List<BoardGame> unsubscribedGames = new ArrayList<>();
+        List<Meeting> createdMeets = new ArrayList<>();
+        for (Meeting meet : currentUser.getMeetingSet()) {
+            if (meet.getCreator().equals(currentUser)) {
+                createdMeets.add(meet);
+            }
+        }
+        return createdMeets;
+    }
 
 
 

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -28,6 +29,7 @@ public class BoardGame {
     String description;
     Integer age = 0;
     Integer rating = 0;
+    boolean active = true;
 
     public Integer getNumberOfOwners() {
         if(owners == null) {

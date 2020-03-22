@@ -45,6 +45,15 @@ public class User {
     //@JsonBackReference
     List<Meeting> meetingSet;
 
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+//    @JoinColumn(referencedColumnName = "id")
+    @JoinTable(
+            name = "meet_creators",
+            joinColumns = {@JoinColumn(name = "creator_id")},
+            inverseJoinColumns = {@JoinColumn(name = "meet_id")}
+    )
+    List<Meeting> createdMeets;
+
 
 
 

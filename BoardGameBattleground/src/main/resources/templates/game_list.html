@@ -32,7 +32,7 @@
                         <th></th>
                     </tr>
                     <th:block th:each="game: ${games}">
-                        <tr>
+                        <tr th:if="${game.isActive()}">
                             <td><img th:src="${game.getLogo()}" height="30px"></td>
                             <td th:text="${game.getTitle()}" height="16px"></td>
                             <td th:text="${game.getRating()}" align="right"></td>

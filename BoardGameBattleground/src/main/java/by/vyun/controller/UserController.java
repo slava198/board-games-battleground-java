@@ -71,7 +71,7 @@ public class UserController {
 
     @PostMapping("/sign_in")
     public String signIn(User user, HttpSession session, Model model) {
-        User signedUser;
+        User signedUser = null;
         try {
             signedUser = userService.signIn(user);
             session.setAttribute("user", signedUser);
@@ -84,6 +84,7 @@ public class UserController {
             model.addAttribute("error", ex.getMessage());
         }
         model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("createdMeetings", userService.getCreatedMeets(signedUser));
         return "account";
 
     }
@@ -134,6 +135,16 @@ public class UserController {
 //        model.addAttribute("user", currentUser);
         model.addAttribute("game", game);
         return "meet_create";
+    }
+
+    @GetMapping("/delete_meet")
+    public String deleteMeet(int meetId, HttpSession session, Model model) {
+        //User currentUser = (User) session.getAttribute("user");
+        //currentUser = userService.leaveMeeting(currentUser.getId(), meetId);
+        //session.setAttribute("user", currentUser);
+        meetingService.removeMeet(meetId);
+        model.addAttribute("user", session.getAttribute("user"));
+        return "account";
     }
 
     @PostMapping("/new_meet")

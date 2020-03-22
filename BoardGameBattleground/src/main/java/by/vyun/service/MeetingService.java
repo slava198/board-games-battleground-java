@@ -31,6 +31,12 @@ public class MeetingService {
         meetingRepo.saveAndFlush(meeting);
     }
 
+    public void removeMeet(int id) {
+
+        meetingRepo.deleteById(id);
+        meetingRepo.flush();
+    }
+
 
 
 

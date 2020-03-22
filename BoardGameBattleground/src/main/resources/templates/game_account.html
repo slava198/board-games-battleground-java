@@ -15,6 +15,7 @@
     <span th:text="${error}" style="background-color: lightpink; "></span>
 </div>
 <div th:if="${error == null}">
+    <a href="/user/back">Back</a>
     <table>
         <tr>
 <!--            <td id="column_1">-->
@@ -39,14 +40,12 @@
 <!--            </td>-->
             <td id="column_2">
                 <div>
-                    <h1>Game detales</h1>
-<!--                    <form method="get" action="/user/gameListPage">-->
-<!--                        <input type="submit" value="Add games">-->
-<!--                    </form>-->
+                    <h1>Game details</h1>
+                    <img th:src="${game.getLogo()}" height="150px">
                     <h4 th:text="${game.getTitle()}"></h4>
-                    <h4 th:text="${game.getDescription()}"></h4>
-                    <h4 th:text="${game.getNumberOfMeetings()}"></h4>
-                    <h4 th:text="${game.getNumberOfOwners()}"></h4>
+                    <h6 th:text="${game.getDescription()}"></h6>
+                    <h4 th:text="${game.getNumberOfMeetings()}">"Meetings: </h4>
+                    <h4 th:text="${game.getNumberOfOwners()}">Gamers: </h4>
                 </div>
             </td>
             <td id="column_3">

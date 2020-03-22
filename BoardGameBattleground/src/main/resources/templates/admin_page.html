@@ -100,7 +100,8 @@
                             <td th:text="${game.getRating()}" align="right"></td>
                             <td th:text="${game.getNumberOfOwners()}" align="right"></td>
                             <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
-                            <td><a th:href="@{/admin/removeGameById(id = ${game.id})}">Delete</a></td>
+                            <td th:if="${game.isActive()}"><a th:href="@{/admin/changeGameStatusById(id = ${game.id})}">Deactivate</a></td>
+                            <td th:if="${!game.isActive()}"><a th:href="@{/admin/changeGameStatusById(id = ${game.id})}">Activate</a></td>
                         </tr>
                     </th:block>
                 </table>
