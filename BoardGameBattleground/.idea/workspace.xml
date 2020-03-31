@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6c70a05-ee62-47a5-a328-fda6303482df" name="Default Changelist" comment="fixed bugs from previous commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/config/MvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/config/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" afterDir="false" />
@@ -11,18 +13,14 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/BoardGameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/BoardGameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/MeetingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/MeetingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/game_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/game_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/meet_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/meet_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/game_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/game_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/game_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/game_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/meet_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/meet_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/registration.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,6 +90,7 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -107,7 +106,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -184,7 +183,12 @@
       <workItem from="1583958982415" duration="5546000" />
       <workItem from="1584044128519" duration="10021000" />
       <workItem from="1584475394276" duration="29926000" />
-      <workItem from="1584825644690" duration="7955000" />
+      <workItem from="1584825644690" duration="8183000" />
+      <workItem from="1585072262704" duration="7124000" />
+      <workItem from="1585401580145" duration="1353000" />
+      <workItem from="1585403314795" duration="4344000" />
+      <workItem from="1585493439543" duration="1771000" />
+      <workItem from="1585684838527" duration="6883000" />
     </task>
     <servers />
   </component>
@@ -207,21 +211,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed bugs from previous commit" />
     <option name="LAST_COMMIT_MESSAGE" value="fixed bugs from previous commit" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java</url>
-          <line>151</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java</url>
-          <line>162</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

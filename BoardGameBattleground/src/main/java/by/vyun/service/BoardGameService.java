@@ -31,8 +31,7 @@ public class BoardGameService {
         BoardGame game = gameRepo.getOne(id);
         game.setActive(!game.isActive());
         gameRepo.saveAndFlush(game);
-        //gameRepo.deleteById(id);
-        //gameRepo.delete(game);
+
     }
 
 

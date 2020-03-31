@@ -68,7 +68,6 @@ public class UserService {
             currentUser.setAge(changedUser.getAge());
             currentUser.setPassword(changedUser.getPassword());
             return userRepo.saveAndFlush(currentUser);
-
     }
 
 
@@ -98,7 +97,7 @@ public class UserService {
         return allGames;
     }
 
-    public void createMeet() {};
+    //public void createMeet() {};
 
     public User takePartInMeeting(int userId, int meetingId) {
         User currentUser = userRepo.getFirstById(userId);

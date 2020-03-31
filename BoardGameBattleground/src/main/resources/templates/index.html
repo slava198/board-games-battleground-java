@@ -35,6 +35,7 @@
                 <th></th>
                 <th>Title</th>
                 <th>Rating</th>
+                <th>Meetings</th>
                 <!--            <th>Owners</th>-->
                 <!--            <th>Meetings</th>-->
             </tr>
@@ -43,6 +44,7 @@
                 <td><img th:src="${game.getLogo()}" height="30px"></td>
                 <td th:text="${game.getTitle()}" height="16px"></td>
                 <td th:text="${game.getRating()}" align="right"></td>
+                <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
                 <!--            <td th:text="${game.getNumberOfOwners()}" align="right"></td>-->
                 <!--            <td th:text="${game.getNumberOfMeetings()}" align="right"></td>-->
                 <!--            <td><a th:href="@{/removeById(login=${game.login})}">Delete</a></td>-->

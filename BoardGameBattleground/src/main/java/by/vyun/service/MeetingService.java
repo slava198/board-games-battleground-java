@@ -20,6 +20,7 @@ public class MeetingService {
     public List<Meeting> getAllMeetings() {
         return meetingRepo.findAll();
     }
+
     public Meeting getMeetingById(int id) {
         return meetingRepo.getFirstById(id);
     }

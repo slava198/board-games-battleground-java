@@ -45,6 +45,7 @@ public class UserController {
         }
         catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
+            return "registration";
         }
         return "redirect:/";
 
@@ -72,6 +73,7 @@ public class UserController {
     @PostMapping("/sign_in")
     public String signIn(User user, HttpSession session, Model model) {
         User signedUser = null;
+
         try {
             signedUser = userService.signIn(user);
             session.setAttribute("user", signedUser);
@@ -121,6 +123,7 @@ public class UserController {
         BoardGame game = gameService.getGameById(gameId);
         //session.setAttribute("user", user);
         model.addAttribute("game", game);
+        model.addAttribute("user", session.getAttribute("user"));
         return "game_account";
     }
 
@@ -164,6 +167,7 @@ public class UserController {
         currentUser = userService.takePartInMeeting(currentUser.getId(), meetId);
         session.setAttribute("user", currentUser);
         model.addAttribute("game", meetingService.getMeetingById(meetId).getGame());
+        model.addAttribute("user", currentUser);
         return "game_account";
     }
 
@@ -172,6 +176,7 @@ public class UserController {
         User currentUser = (User) session.getAttribute("user");
         currentUser = userService.leaveMeeting(currentUser.getId(), meetId);
         session.setAttribute("user", currentUser);
+        model.addAttribute("game", meetingService.getMeetingById(meetId).getGame());
         model.addAttribute("user", currentUser);
         return "account";
     }

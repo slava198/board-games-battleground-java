@@ -70,6 +70,7 @@
                                 <td th:text="${meeting.getDateTime()}" align="right"></td>
                                 <td th:text="${meeting.getNumberOfMembers()}" align="right"></td>
                                 <td><a th:href="@{/user/add_meet(meetId = ${meeting.id})}">Take part</a></td>
+
                             </tr>
                         </th:block>
                     </table>

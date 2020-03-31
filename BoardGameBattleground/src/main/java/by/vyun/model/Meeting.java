@@ -23,7 +23,7 @@ import java.util.List;
         property = "@meetingId")
 public class Meeting {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     String location;
     String dateTime;
