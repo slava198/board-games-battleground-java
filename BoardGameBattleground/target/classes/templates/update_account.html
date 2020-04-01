@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${error}" style="text-align: center">
+    <span th:text="${error}" style="background-color: lightpink; "></span>
+</div>
+<a href="/user/back">Back</a>
+<form method="post" action="/user/update">
+    <div>
+        <p>Current password: <input name="password" type="password" th:value="${user.password}"></p>
+    </div>
+    <div>
+        <p>New password: <input name="newPassword" type="password" th:value="${user.password}"></p>
+    </div>
+    <div>
+        <p>Confirm new password: <input name="newPasswordConfirm" type="password" th:value="${user.password}"></p>
+    </div>
+    <div>
+        <p>Location: <input name="location" th:value="${user.location}"></p>
+    </div>
+    <div>
+        <p>Age: <input name="age" th:value="${user.age}"></p>
+    </div>
+    <input type="submit" value="Update">
+    <!--    <button id="saveBtn">Save</button>-->
+    <!--    <button id="cancelBtn">Cancel</button>-->
+</form>
+
+</body>
+</html>

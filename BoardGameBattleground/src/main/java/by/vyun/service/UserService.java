@@ -26,6 +26,7 @@ public class UserService {
         return userRepo.getFirstById(id);
     }
 
+
     public User registration(User user) throws RegistrationException {
 
         if (user.getLogin().trim().length() * user.getPassword().trim().length() * user.getLocation().trim().length() == 0) {
@@ -43,7 +44,7 @@ public class UserService {
         if (foundedUser == null) {
             throw new RegistrationException("Login not founded!!!");
         }
-        if (!user.getPassword().equals(foundedUser.getPassword())) {
+        if (!user.checkPassword(foundedUser.getPassword())) {
             throw new RegistrationException("Invalid password!!!");
         }
         return foundedUser;
@@ -54,12 +55,11 @@ public class UserService {
         if (foundedUser == null) {
             throw new RegistrationException("Login not founded!!!");
         }
-        if (!password.equals(foundedUser.getPassword())) {
+        if (!foundedUser.checkPassword(password)) {
             throw new RegistrationException("Invalid password!!!");
         }
         return foundedUser;
     }
-
 
 
     public User update(int id, User changedUser) throws RegistrationException {

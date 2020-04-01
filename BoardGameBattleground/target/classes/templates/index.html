@@ -11,68 +11,81 @@
     <title>Title</title>
 </head>
 <body>
-<div th:if="${error != null}" style="text-align: center">
+<div th:if="${error}" style="text-align: center">
     <span th:text="${error}" style="background-color: lightpink; "></span>
 </div>
 
+<table>
+    <tr>
+        <form method="post" action="/user/sign_in">
+            <input name="login" placeholder="login">
+            <input name="password" placeholder="password">
 
-<form method="post" action="/user/sign_in">
-    <input name="login" placeholder="login">
-    <input name="password" placeholder="password">
+            <input type="submit" value="Sign in">
 
-    <input type="submit" value="Sign in">
+            <!--    <button id="saveBtn">Save</button>-->
+            <!--    <button id="cancelBtn">Cancel</button>-->
+        </form>
+        <form method="get" action="/user/registration_page">
+            <input type="submit" value="Reg">
+        </form>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Rating</th>
+                        <th>Meetings</th>
+                        <!--            <th>Owners</th>-->
+                        <!--            <th>Meetings</th>-->
+                    </tr>
+                    <th:block th:each="game : ${games}">
+                        <tr th:if="${game.isActive()}">
+                            <td><img th:src="${game.getLogo()}" height="30px"></td>
+                            <td th:text="${game.getTitle()}" height="16px"></td>
+                            <td th:text="${game.getRating()}" align="right"></td>
+                            <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
+                            <!--            <td th:text="${game.getNumberOfOwners()}" align="right"></td>-->
+                            <!--            <td th:text="${game.getNumberOfMeetings()}" align="right"></td>-->
+                            <!--            <td><a th:href="@{/removeById(login=${game.login})}">Delete</a></td>-->
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </td>
+        <td>
+            <div>
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Members</th>
+                    </tr>
+                    <th:block th:each="meeting : ${meetings}">
+                        <tr>
+                            <td th:text="${meeting.getGame().getTitle()}" height="30px"></td>
+                            <td th:text="${meeting.getLocation()}" height="16px"></td>
+                            <td th:text="${meeting.getDateTime()}" align="right"></td>
+                            <td th:text="${meeting.getMembers().size()}" align="right"></td>
+                            <!--                                <td><a th:href="@{/user/remove_game(gameId = ${meeting.id})}">Delete</a></td>-->
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
 
-    <!--    <button id="saveBtn">Save</button>-->
-    <!--    <button id="cancelBtn">Cancel</button>-->
-</form>
-<form method="get" action="/user/registrationPage">
-    <input type="submit" value="Reg">
-</form>
+
 <!--<a href="registration.html">Registration</a>-->
-<div>
-    <table>
-            <tr>
-                <th></th>
-                <th>Title</th>
-                <th>Rating</th>
-                <th>Meetings</th>
-                <!--            <th>Owners</th>-->
-                <!--            <th>Meetings</th>-->
-            </tr>
-        <th:block th:each="game : ${games}">
-            <tr th:if="${game.isActive()}">
-                <td><img th:src="${game.getLogo()}" height="30px"></td>
-                <td th:text="${game.getTitle()}" height="16px"></td>
-                <td th:text="${game.getRating()}" align="right"></td>
-                <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
-                <!--            <td th:text="${game.getNumberOfOwners()}" align="right"></td>-->
-                <!--            <td th:text="${game.getNumberOfMeetings()}" align="right"></td>-->
-                <!--            <td><a th:href="@{/removeById(login=${game.login})}">Delete</a></td>-->
-            </tr>
-        </th:block>
-    </table>
-</div>
 
 
-<div>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Location</th>
-            <th>Date</th>
-            <th>Members</th>
-        </tr>
-        <th:block th:each="meeting : ${meetings}">
-            <tr>
-                <td th:text="${meeting.getGame().getTitle()}" height="30px"></td>
-                <td th:text="${meeting.getLocation()}" height="16px"></td>
-                <td th:text="${meeting.getDateTime()}" align="right"></td>
-                <td th:text="${meeting.getMembers().size()}" align="right"></td>
-                <!--                                <td><a th:href="@{/user/remove_game(gameId = ${meeting.id})}">Delete</a></td>-->
-            </tr>
-        </th:block>
-    </table>
-</div>
+
+
 
 </body>
 </html>

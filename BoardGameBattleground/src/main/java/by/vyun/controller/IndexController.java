@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 //@NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +23,9 @@ public class IndexController {
     MeetingService meetingService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
+        model.addAttribute("error", session.getAttribute("error"));
+        session.removeAttribute("error");
         model.addAttribute("games", gameService.getAllGames());
         model.addAttribute("meetings", meetingService.getAllMeetings());
 

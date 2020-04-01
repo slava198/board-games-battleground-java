@@ -10,11 +10,52 @@
     <title>Registration</title>
 </head>
 <body>
-<label th:if="${error}" th:text="${error}"></label>
+<div th:if="${error}" style="text-align: center">
+    <span th:text="${error}" style="background-color: lightpink; "></span>
+</div>
 <form method="post" action="/user/registration">
-    <input name="login" placeholder="login">
-    <input name="password" placeholder="password">
-    <input name ="location" placeholder="location">
+    <table>
+        <tr>
+            <td>
+                <label>Enter login:</label>
+            </td>
+            <td>
+                <input name="login" placeholder="Login">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Enter password:</label>
+            </td>
+            <td>
+                <input name="password" placeholder="Password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Confirm the password:</label>
+            </td>
+            <td>
+                <input name="passwordConfirm" placeholder="Confirm password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Enter your location:</label>
+            </td>
+            <td>
+                <input name ="location" placeholder="Location">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Enter your age:</label>
+            </td>
+            <td>
+                <input name ="age" placeholder="Age">
+            </td>
+        </tr>
+    </table>
     <input type="submit" value="Register">
 
     <!--    <button id="saveBtn">Save</button>-->

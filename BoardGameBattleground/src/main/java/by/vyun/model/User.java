@@ -56,7 +56,9 @@ public class User {
 
 
 
-
+    public boolean checkPassword(String password) {
+        return this.getPassword().equals(password);
+    }
 
     public void addGameToCollection(BoardGame game) {
         gameCollection.add(game);
@@ -73,7 +75,8 @@ public class User {
 
     public void deleteMeeting(Meeting meeting) {
         meetingSet.remove(meeting);
-
     }
+
+
 
 }

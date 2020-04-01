@@ -19,28 +19,22 @@
         <tr>
             <td id="column_1">
                 <h1 th:text="${user.login}"></h1>
-                <a href="/user/logout">Exit</a>
+                <div>
+                    <a href="/user/update_page">Change account</a>
+                </div>
+                <div>
+                    <a href="/user/logout">Exit</a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-
-                <form method="post" action="/user/update">
-                    <div>
-                        <p>Password: <input name="password" th:value="${user.password}"></p>
-                    </div>
-                    <div>
-                        <p>Location: <input name="location" th:value="${user.location}"></p>
-                    </div>
-                    <div>
-                        <p>Age: <input name="age" th:value="${user.age}"></p>
-                    </div>
-                    <input type="submit" value="Update">
-                    <!--    <button id="saveBtn">Save</button>-->
-                    <!--    <button id="cancelBtn">Cancel</button>-->
-                </form>
             </td>
             <td id="column_2">
                 <div>
                     <h1>My games</h1>
-                    <form method="get" action="/user/gameListPage">
+                    <form method="get" action="/user/gameList_page">
                         <input type="submit" value="Add games">
                     </form>
                     <table>
