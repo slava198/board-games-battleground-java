@@ -60,6 +60,8 @@
                             <td th:text="${usr.getPassword()}" align="right"></td>
                             <td th:text="${usr.getAge()}" align="right"></td>
                             <td th:text="${usr.getLocation()}" align="right"></td>
+                            <td th:text="${usr.n()}" align="right"></td>
+
                             <!--                <td><a th:href="@{/user/removeGameById(login = ${user.login}, id = ${game.id})}">Delete</a></td>-->
                         </tr>
                     </th:block>

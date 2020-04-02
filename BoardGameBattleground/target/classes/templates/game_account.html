@@ -18,34 +18,24 @@
     <a href="/user/back">Back</a>
     <table>
         <tr>
-<!--            <td id="column_1">-->
-<!--                <h1 th:text="${user.login}"></h1>-->
-<!--                <a href="/user/logout">Exit</a>-->
-
-
-<!--                <form method="post" action="/user/update">-->
-<!--                    <div>-->
-<!--                        <p>Password: <input name="password" th:value="${user.password}"></p>-->
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        <p>Location: <input name="location" th:value="${user.location}"></p>-->
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        <p>Age: <input name="age" th:value="${user.age}"></p>-->
-<!--                    </div>-->
-<!--                    <input type="submit" value="Update">-->
-<!--                    &lt;!&ndash;    <button id="saveBtn">Save</button>&ndash;&gt;-->
-<!--                    &lt;!&ndash;    <button id="cancelBtn">Cancel</button>&ndash;&gt;-->
-<!--                </form>-->
-<!--            </td>-->
             <td id="column_2">
                 <div>
                     <h1>Game details</h1>
                     <img th:src="${game.getLogo()}" height="150px">
                     <h4 th:text="${game.getTitle()}"></h4>
-                    <h6 th:text="${game.getDescription()}"></h6>
-                    <h4 th:text="${game.getNumberOfMeetings()}">"Meetings: </h4>
-                    <h4 th:text="${game.getNumberOfOwners()}">Gamers: </h4>
+                    <h4 th:text="${game.getDescription()}"></h4>
+                    <table>
+                        <tr>
+                            <td>Meetings: </td>
+                            <td><h4 th:text="${game.getNumberOfMeetings()}"></h4></td>
+                        </tr>
+                        <tr>
+                            <td>Gamers: </td>
+                            <td><h4 th:text="${game.getNumberOfOwners()}"></h4>
+                        </tr>
+                    </table>
+                    <a th:href="@{/user/remove_game(gameId = ${game.id})}">Remove game</a><br>
+                    <a th:href="@{/user/create_meet(gameId = ${game.id})}">Create meeting</a>
                 </div>
             </td>
             <td id="column_3">

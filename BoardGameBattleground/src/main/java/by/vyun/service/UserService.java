@@ -71,6 +71,8 @@ public class UserService {
     }
 
 
+
+
     public User removeGameById(String login, int gameId) {
         User user = userRepo.getFirstByLogin(login);
         BoardGame game = gameRepo.getOne(gameId);
@@ -97,7 +99,7 @@ public class UserService {
         return allGames;
     }
 
-    //public void createMeet() {};
+
 
     public User takePartInMeeting(int userId, int meetingId) {
         User currentUser = userRepo.getFirstById(userId);

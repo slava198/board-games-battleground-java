@@ -29,7 +29,23 @@ public class BoardGame {
     String description;
     Integer age = 0;
     Integer rating = 0;
-    boolean active = true;
+    @Column(columnDefinition = "true")
+    Boolean isActive = true;
+
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "games_owners",
+        joinColumns = {@JoinColumn(name = "game_id")},
+        inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    Set<User> owners;
+
+    @OneToMany(mappedBy = "game")
+    Set<Meeting> meetings;
+
+
 
     public Integer getNumberOfOwners() {
         if(owners == null) {
@@ -44,27 +60,6 @@ public class BoardGame {
         }
         return meetings.size();
     }
-
-//    @ManyToMany(mappedBy = "gameCollection")
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "games_owners",
-        joinColumns = {@JoinColumn(name = "game_id")},
-        inverseJoinColumns = {@JoinColumn(name = "user_id")}
-    )
-    //@JsonBackReference
-    Set<User> owners;
-
-    @OneToMany(mappedBy = "game")
-    //@JsonManagedReference
-    Set<Meeting> meetings;
-
-    public void clearOwnersList() {
-        owners.clear();
-
-    }
-
-
 
 
 }

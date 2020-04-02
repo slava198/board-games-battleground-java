@@ -17,14 +17,15 @@ public class UserRestController {
     UserService userService;
     BoardGameService gameService;
 
-    @PostMapping("/gameListPage")
+    @GetMapping("/gameListPage")
     public List<BoardGame> gameListPage(int userId) {
         User currentUser = userService.getUserById(userId);
         return userService.getUnsubscribedGames(currentUser);
     }
 
-    @PostMapping("/registration")
-    public String registration(User user) {
+    //              REQUESTS WITH PATH /USER
+    @PostMapping("/user")
+    public String registration(@RequestBody User user) {
         try {
             userService.registration(user);
         }
@@ -35,38 +36,8 @@ public class UserRestController {
         return "ok";
     }
 
-//    @GetMapping("/registration/{login}&{password}")
-//    public String registration(@PathVariable String login, @PathVariable String password) {
-//        try {
-//            User user = new User();
-//            user.setLogin(login);
-//            user.setPassword(password);
-//            user.setLocation("brest");
-//            userService.registration(user);
-//        }
-//        catch (RegistrationException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//        return "ok";
-//    }
-
-
-    @PostMapping("/update")
-    public User update(int userId, User changedUser) {
-        User currentUser = new User();
-        try {
-            currentUser = userService.update(userId, changedUser);
-        }
-        catch (RegistrationException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return currentUser;
-
-    }
-
-
-    @GetMapping("/sign_in/{login}&{password}")
-    public User signIn(@PathVariable String login, @PathVariable String password) {
+    @GetMapping("/user")
+    public User signIn(String login, String password) {
         User signedUser = new User();
         try {
             signedUser = userService.signIn(login, password);
@@ -76,6 +47,26 @@ public class UserRestController {
         }
         return signedUser;
     }
+
+    @PutMapping("/user")
+    public User update(@RequestBody int userId, @RequestBody User changedUser) {
+        User currentUser = new User();
+        try {
+            currentUser = userService.update(userId, changedUser);
+        }
+        catch (RegistrationException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return currentUser;
+    }
+
+
+
+
+
+
+
+
 
 //    @GetMapping("/sign_in/{login}&{password}")
 //    public ResponseEntity<User> signIn(@PathVariable String login, @PathVariable String password) {
@@ -93,16 +84,16 @@ public class UserRestController {
 
 
 
-    @PostMapping("/add_game")
-    public User addGame(int userId, int gameId) {
-        return userService.addGameToUser(gameId, userService.getUserById(userId));
-
-    }
-
-    @PostMapping("/remove_game")
-    public User removeGame(int userId, int gameId) {
-        return userService.removeGameById(userService.getUserById(userId).getLogin(), gameId);
-    }
+//    @PostMapping("/user/game")
+//    public User addGame(int userId, int gameId) {
+//        return userService.addGameToUser(gameId, userService.getUserById(userId));
+//
+//    }
+//
+//    @DeleteMapping("/user/game")
+//    public User removeGame(int userId, int gameId) {
+//        return userService.removeGameById(userService.getUserById(userId).getLogin(), gameId);
+//    }
 
 
 //    @GetMapping("/back")

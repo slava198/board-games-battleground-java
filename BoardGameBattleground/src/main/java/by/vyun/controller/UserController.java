@@ -187,7 +187,6 @@ public class UserController {
     public String addMeeting(int meetId, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
         currentUser = userService.takePartInMeeting(currentUser.getId(), meetId);
-        //session.setAttribute("user", currentUser);
         model.addAttribute("game", meetingService.getMeetingById(meetId).getGame());
         model.addAttribute("user", currentUser);
         return "game_account";
@@ -206,7 +205,6 @@ public class UserController {
 
     @GetMapping("/back")
     public String back(HttpSession session, Model model) {
-        //session.setAttribute("user", userService.getUserById((Integer) session.getAttribute("userId")));
         model.addAttribute("user", session.getAttribute("user"));
         return "account";
     }

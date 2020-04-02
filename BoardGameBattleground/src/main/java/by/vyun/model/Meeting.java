@@ -28,19 +28,12 @@ public class Meeting {
     String location;
     String dateTime;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-//    @JoinColumn(referencedColumnName = "id")
-    @JoinTable(
-            name = "meet_creators",
-            joinColumns = {@JoinColumn(name = "meet_id")},
-            inverseJoinColumns = {@JoinColumn(name = "creator_id")}
-    )
+    @ManyToOne
+    @JoinColumn(name = "creatorId")
     User creator;
-
 
     @ManyToOne()
     @JoinColumn(name = "game_id")
-    //@JsonBackReference
     BoardGame game;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -49,7 +42,6 @@ public class Meeting {
             joinColumns = {@JoinColumn(name = "meeting_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
-    //@JsonManagedReference
     List<User> members;
 
     public int getNumberOfMembers() {

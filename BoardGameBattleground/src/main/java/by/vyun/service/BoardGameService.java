@@ -29,10 +29,11 @@ public class BoardGameService {
 
     public void changeGameStatusById(Integer id) {
         BoardGame game = gameRepo.getOne(id);
-        game.setActive(!game.isActive());
+        game.setIsActive(!game.getIsActive());
         gameRepo.saveAndFlush(game);
 
     }
+
 
 
 }

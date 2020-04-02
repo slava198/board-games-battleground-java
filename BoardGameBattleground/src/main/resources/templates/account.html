@@ -42,8 +42,8 @@
                             <th></th>
                             <th>Title</th>
                             <th>Rating</th>
-                            <th>Owners</th>
-                            <th>Meetings</th>
+<!--                            <th>Owners</th>-->
+<!--                            <th>Meetings</th>-->
                             <th></th>
                             <th></th>
                             <th></th>
@@ -53,11 +53,10 @@
                                 <td><img th:src="${game.getLogo()}" height="30px"></td>
                                 <td th:text="${game.getTitle()}" height="16px"></td>
                                 <td th:text="${game.getRating()}" align="right"></td>
-                                <td th:text="${game.getNumberOfOwners()}" align="right"></td>
-                                <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
+<!--                                <td th:text="${game.getNumberOfOwners()}" align="right"></td>-->
+<!--                                <td th:text="${game.getNumberOfMeetings()}" align="right"></td>-->
                                 <td><a th:href="@{/user/see_game(gameId = ${game.id})}">See more...</a></td>
-                                <td><a th:href="@{/user/remove_game(gameId = ${game.id})}">Remove</a></td>
-                                <td><a th:href="@{/user/create_meet(gameId = ${game.id})}">Create meet</a></td>
+
                             </tr>
                         </th:block>
                     </table>
@@ -67,16 +66,14 @@
             <td id="column_3">
                 <div>
                     <h1>My meetings</h1>
-                    <form method="get" action="/user/add_meeting">
-                        <input type="submit" value="Add meeting">
-                    </form>
+
                     <table>
                         <tr>
 
                             <th>Title</th>
                             <th>Location</th>
                             <th>Date</th>
-                            <th>Members</th>
+<!--                            <th>Members</th>-->
                             <th>Leave</th>
 
                         </tr>
@@ -85,7 +82,7 @@
                                 <td th:text="${meeting.getGame().getTitle()}" height="30px"></td>
                                 <td th:text="${meeting.getLocation()}" height="16px"></td>
                                 <td th:text="${meeting.getDateTime()}" align="right"></td>
-                                <td th:text="${meeting.getNumberOfMembers()}" align="right"></td>
+<!--                                <td th:text="${meeting.getNumberOfMembers()}" align="right"></td>-->
                                 <td><a th:href="@{/user/leave_meet(meetId = ${meeting.id})}">Leave</a></td>
                             </tr>
                         </th:block>

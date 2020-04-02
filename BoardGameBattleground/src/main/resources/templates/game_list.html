@@ -8,7 +8,7 @@
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
 
-    <title>ADMIN</title>
+    <title>Adding games</title>
 </head>
 <body>
 
@@ -27,17 +27,17 @@
                         <th></th>
                         <th>Title</th>
                         <th>Rating</th>
-                        <th>Owners</th>
-                        <th>Meetings</th>
+<!--                        <th>Owners</th>-->
+<!--                        <th>Meetings</th>-->
                         <th></th>
                     </tr>
                     <th:block th:each="game: ${games}">
-                        <tr th:if="${game.isActive()}">
+                        <tr th:if="${game.getIsActive()}">
                             <td><img th:src="${game.getLogo()}" height="30px"></td>
                             <td th:text="${game.getTitle()}" height="16px"></td>
                             <td th:text="${game.getRating()}" align="right"></td>
-                            <td th:text="${game.getNumberOfOwners()}" align="right"></td>
-                            <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
+<!--                            <td th:text="${game.getNumberOfOwners()}" align="right"></td>-->
+<!--                            <td th:text="${game.getNumberOfMeetings()}" align="right"></td>-->
                             <td><a th:href="@{/user/add_game(gameId = ${game.id})}">Add to collection</a></td>
                         </tr>
                     </th:block>

@@ -25,15 +25,14 @@ public class User {
     Integer age = 0;
     String location;
     Integer rating = 0;
-    //    @JoinColumn(name = "game_id")
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "games_owners",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "game_id")}
     )
-    //@JsonManagedReference
     List<BoardGame> gameCollection;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -42,16 +41,9 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "meeting_id")}
     )
-    //@JsonBackReference
     List<Meeting> meetingSet;
 
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-//    @JoinColumn(referencedColumnName = "id")
-    @JoinTable(
-            name = "meet_creators",
-            joinColumns = {@JoinColumn(name = "creator_id")},
-            inverseJoinColumns = {@JoinColumn(name = "meet_id")}
-    )
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     List<Meeting> createdMeets;
 
 
@@ -76,7 +68,5 @@ public class User {
     public void deleteMeeting(Meeting meeting) {
         meetingSet.remove(meeting);
     }
-
-
 
 }
