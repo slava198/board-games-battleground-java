@@ -35,12 +35,12 @@
                         </tr>
                     </table>
                     <a th:href="@{/user/remove_game(gameId = ${game.id})}">Remove game</a><br>
-                    <a th:href="@{/user/create_meet(gameId = ${game.id})}">Create meeting</a>
+
                 </div>
             </td>
             <td id="column_3">
                 <div>
-                    <h1>Meetings</h1>
+                    <h1>Meetings </h1><a th:href="@{/user/createMeet_page(gameId = ${game.id})}">add</a>
 <!--                    <form method="get" action="/user/add_meeting">-->
 <!--                        <input type="submit" value="Add meeting">-->
 <!--                    </form>-->

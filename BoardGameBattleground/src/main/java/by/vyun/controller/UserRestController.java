@@ -25,7 +25,7 @@ public class UserRestController {
 
     //              REQUESTS WITH PATH /USER
     @PostMapping("/user")
-    public String registration(@RequestBody User user) {
+    public String registration(User user) {
         try {
             userService.registration(user);
         }
@@ -84,16 +84,16 @@ public class UserRestController {
 
 
 
-//    @PostMapping("/user/game")
-//    public User addGame(int userId, int gameId) {
-//        return userService.addGameToUser(gameId, userService.getUserById(userId));
-//
-//    }
-//
-//    @DeleteMapping("/user/game")
-//    public User removeGame(int userId, int gameId) {
-//        return userService.removeGameById(userService.getUserById(userId).getLogin(), gameId);
-//    }
+    @PostMapping("/user/game")
+    public User addGame(int userId, int gameId) {
+        return userService.addGame(userId, gameId);
+
+    }
+
+    @DeleteMapping("/user/game")
+    public User deleteGame(int userId, int gameId) {
+        return userService.deleteGame(userId, gameId);
+    }
 
 
 //    @GetMapping("/back")

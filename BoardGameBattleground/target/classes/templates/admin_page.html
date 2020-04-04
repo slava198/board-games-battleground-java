@@ -60,7 +60,7 @@
                             <td th:text="${usr.getPassword()}" align="right"></td>
                             <td th:text="${usr.getAge()}" align="right"></td>
                             <td th:text="${usr.getLocation()}" align="right"></td>
-                            <td th:text="${usr.n()}" align="right"></td>
+<!--                            <td th:text="${usr.()}" align="right"></td>-->
 
                             <!--                <td><a th:href="@{/user/removeGameById(login = ${user.login}, id = ${game.id})}">Delete</a></td>-->
                         </tr>
@@ -102,8 +102,8 @@
                             <td th:text="${game.getRating()}" align="right"></td>
                             <td th:text="${game.getNumberOfOwners()}" align="right"></td>
                             <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
-                            <td th:if="${game.isActive()}"><a th:href="@{/admin/changeGameStatusById(id = ${game.id})}">Deactivate</a></td>
-                            <td th:if="${!game.isActive()}"><a th:href="@{/admin/changeGameStatusById(id = ${game.id})}">Activate</a></td>
+                            <td th:if="${game.getIsActive()}"><a th:href="@{/admin/changeGameStatusById(id = ${game.id})}">Deactivate</a></td>
+                            <td th:if="${!game.getIsActive()}"><a th:href="@{/admin/changeGameStatusById(id = ${game.id})}">Activate</a></td>
                         </tr>
                     </th:block>
                 </table>

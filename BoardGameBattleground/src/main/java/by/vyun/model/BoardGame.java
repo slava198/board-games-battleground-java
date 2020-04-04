@@ -42,7 +42,7 @@ public class BoardGame {
     )
     Set<User> owners;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
     Set<Meeting> meetings;
 
 

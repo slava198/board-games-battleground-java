@@ -33,10 +33,10 @@
             </td>
             <td id="column_2">
                 <div>
-                    <h1>My games</h1>
-                    <form method="get" action="/user/gameList_page">
-                        <input type="submit" value="Add games">
-                    </form>
+                    <h1>My games </h1><a th:href="@{/user/gameList_page}">add</a>
+<!--                    <form method="get" action="/user/gameList_page">-->
+<!--                        <input type="submit" value="Add games">-->
+<!--                    </form>-->
                     <table>
                         <tr>
                             <th></th>
@@ -48,7 +48,7 @@
                             <th></th>
                             <th></th>
                         </tr>
-                        <th:block th:each="game : ${user.getGameCollection()}">
+                        <th:block th:each="game : ${gameCollection}">
                             <tr>
                                 <td><img th:src="${game.getLogo()}" height="30px"></td>
                                 <td th:text="${game.getTitle()}" height="16px"></td>
@@ -77,7 +77,7 @@
                             <th>Leave</th>
 
                         </tr>
-                        <th:block th:each="meeting : ${user.getMeetingSet()}">
+                        <th:block th:each="meeting : ${meetingSet}">
                             <tr>
                                 <td th:text="${meeting.getGame().getTitle()}" height="30px"></td>
                                 <td th:text="${meeting.getLocation()}" height="16px"></td>

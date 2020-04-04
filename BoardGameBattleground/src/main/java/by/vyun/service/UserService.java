@@ -39,16 +39,16 @@ public class UserService {
         return user;
     }
 
-    public User signIn(User user) throws RegistrationException {
-        User foundedUser = userRepo.getFirstByLogin(user.getLogin());
-        if (foundedUser == null) {
-            throw new RegistrationException("Login not founded!!!");
-        }
-        if (!user.checkPassword(foundedUser.getPassword())) {
-            throw new RegistrationException("Invalid password!!!");
-        }
-        return foundedUser;
-    }
+//    public User signIn(User user) throws RegistrationException {
+//        User foundedUser = userRepo.getFirstByLogin(user.getLogin());
+//        if (foundedUser == null) {
+//            throw new RegistrationException("Login not founded!!!");
+//        }
+//        if (!user.checkPassword(foundedUser.getPassword())) {
+//            throw new RegistrationException("Invalid password!!!");
+//        }
+//        return foundedUser;
+//    }
 
     public User signIn(String login, String password) throws RegistrationException {
         User foundedUser = userRepo.getFirstByLogin(login);
@@ -71,22 +71,23 @@ public class UserService {
     }
 
 
-
-
-    public User removeGameById(String login, int gameId) {
-        User user = userRepo.getFirstByLogin(login);
-        BoardGame game = gameRepo.getOne(gameId);
-        user.deleteGameFromCollection(game);
+    public User deleteGame(int userId, int gameId) {
+        User user = userRepo.getFirstById(userId);
+        user.deleteGameFromCollection(gameRepo.getFirstById(gameId));
         return userRepo.saveAndFlush(user);
     }
 
-    public User addGameToUser(int gameId, User currentUser) {
+
+    public User addGame(int userId, int gameId) {
+        User user = userRepo.getFirstById(userId);
         BoardGame game = gameRepo.getFirstById(gameId);
-        if (!currentUser.getGameCollection().contains(game)) {
-            currentUser.addGameToCollection(game);
+        if (!user.getGameCollection().contains(game)) {
+            user.addGameToCollection(game);
         }
-        return userRepo.saveAndFlush(currentUser);
+        gameRepo.flush();
+        return userRepo.saveAndFlush(user);
     }
+
 
     public List<BoardGame> getUnsubscribedGames(User currentUser) {
 //        List<BoardGame> unsubscribedGames = new ArrayList<>();
@@ -107,10 +108,17 @@ public class UserService {
         if (!currentUser.getMeetingSet().contains(meeting)) {
             currentUser.addMeeting(meeting);
         }
+        meetingRepo.flush();
         return userRepo.saveAndFlush(currentUser);
     }
 
     public User leaveMeeting(int userId, int meetingId) {
+        User currentUser = userRepo.getFirstById(userId);
+        currentUser.leaveMeeting(meetingRepo.getFirstById(meetingId));
+        return userRepo.saveAndFlush(currentUser);
+    }
+
+    public User deleteMeeting(int userId, int meetingId) {
         User currentUser = userRepo.getFirstById(userId);
         currentUser.deleteMeeting(meetingRepo.getFirstById(meetingId));
         return userRepo.saveAndFlush(currentUser);

@@ -13,8 +13,8 @@
 <div>
     <h3 th:text="${game.getTitle()}"></h3>
 </div>
-<a href="/user/back">Back</a>
-<form method="post" action="/user/new_meet">
+<a th:href="@{/user/see_game(gameId = ${game.getId()})}">Back</a>
+<form method="post" action="/user/create_meet">
     <input name ="location" placeholder="location">
     <input name ="dateTime" type="datetime-local" placeholder="${java.version.date}">
     <input name="gameId" th:value="${game.getId()}" >

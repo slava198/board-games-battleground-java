@@ -8,8 +8,8 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString(exclude = {"gameCollection", "meetingSet"})
-@EqualsAndHashCode(exclude = {"gameCollection", "meetingSet"})
+@ToString(exclude = {"gameCollection", "meetingSet", "createdMeets"})
+@EqualsAndHashCode(exclude = {"gameCollection", "meetingSet", "createdMeets"})
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(
@@ -43,7 +43,7 @@ public class User {
     )
     List<Meeting> meetingSet;
 
-    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
     List<Meeting> createdMeets;
 
 
@@ -65,8 +65,13 @@ public class User {
         meetingSet.add(meeting);
     }
 
+    public void leaveMeeting(Meeting meeting) {
+        meetingSet.remove(meeting);
+    }
+
     public void deleteMeeting(Meeting meeting) {
         meetingSet.remove(meeting);
+        createdMeets.remove(meeting);
     }
 
 }
