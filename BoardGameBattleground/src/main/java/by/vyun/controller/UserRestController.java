@@ -2,11 +2,16 @@ package by.vyun.controller;
 
 import by.vyun.exception.RegistrationException;
 import by.vyun.model.BoardGame;
+import by.vyun.model.Meeting;
 import by.vyun.model.User;
 import by.vyun.service.BoardGameService;
+import by.vyun.service.MeetingService;
 import by.vyun.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +21,7 @@ import java.util.Map;
 public class UserRestController {
     UserService userService;
     BoardGameService gameService;
+    MeetingService meetingService;
 
     @GetMapping("/gameListPage")
     public List<BoardGame> gameListPage(int userId) {
@@ -23,7 +29,7 @@ public class UserRestController {
         return userService.getUnsubscribedGames(currentUser);
     }
 
-    //              REQUESTS WITH PATH /USER
+    //************************************** USERS CRUD
     @PostMapping("/user")
     public String registration(User user) {
         try {
@@ -61,53 +67,59 @@ public class UserRestController {
     }
 
 
+    //************************************** GAMES CRUD
 
-
-
-
-
-
-
-//    @GetMapping("/sign_in/{login}&{password}")
-//    public ResponseEntity<User> signIn(@PathVariable String login, @PathVariable String password) {
-//        User signedUser = new User();
-//        List<Map<String, String>> response = new ArrayList<>();
-//        try {
-//            signedUser = userService.signIn(login, password);
-//        }
-//        catch (RegistrationException ex) {
-//            System.out.println("err");
-//            throw new UserNotFoundException(login);
-//        }
-//        return new ResponseEntity<>(signedUser, HttpStatus.OK);
-//    }
-
-
+    @GetMapping("/game")
+    public BoardGame seeGame(int gameId) {
+        return gameService.getGameById(gameId);
+    }
 
     @PostMapping("/user/game")
-    public User addGame(int userId, int gameId) {
+    public User addGame(@RequestBody int userId, @RequestBody int gameId) {
         return userService.addGame(userId, gameId);
 
     }
 
     @DeleteMapping("/user/game")
-    public User deleteGame(int userId, int gameId) {
+    public User deleteGame(@RequestBody int userId, @RequestBody int gameId) {
         return userService.deleteGame(userId, gameId);
     }
 
 
-//    @GetMapping("/back")
-//    public String back(HttpSession session, Model model) {
-//        session.setAttribute("user", userService.getUserById((Integer) session.getAttribute("userId")));
-//        model.addAttribute("user", session.getAttribute("user"));
-//        return "account";
-//    }
+    //*********************************** MEETINGS CRUD
 
-    //    @GetMapping("/logout")
-//    public String logout(HttpSession session) {
-//        session.removeAttribute("user");
-//        return "redirect:/";
-//    }
+    @PostMapping("/user/meet")
+    public String createMeet(int userId, int gameId, Meeting meet) {
+        User currentUser = userService.getUserById(userId);
+        meet.setGame(gameService.getGameById(gameId));
+        meetingService.createMeet(currentUser.getId(), meet);
+        //userService.takePartInMeeting(currentUser.getId(), meet.getId());
+        return "ok";
+    }
+
+    @DeleteMapping("/user/meet")
+    public String deleteMeet(int userId, int meetId) {
+        userService.deleteMeeting(userId, meetId);
+        meetingService.removeMeet(meetId);
+        return "ok";
+    }
+
+
+    @PutMapping("/user/meet_in")
+    public String addMeeting(int userId, int meetId) {
+        userService.takePartInMeeting(userId, meetId);
+        return "ok";
+    }
+
+
+    @PutMapping("/user/meet_out")
+    public String leaveMeeting(int userId, int meetId) {
+        userService.leaveMeeting(userId, meetId);
+        return "ok";
+    }
+
+
+
 
 
 }

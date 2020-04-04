@@ -6,6 +6,7 @@ import by.vyun.model.Meeting;
 import by.vyun.model.User;
 import by.vyun.repo.BoardGameRepo;
 import by.vyun.repo.MeetingRepo;
+import by.vyun.repo.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MeetingService {
     MeetingRepo meetingRepo;
+    UserRepo userRepo;
 
 
     public List<Meeting> getAllMeetings() {
@@ -27,13 +29,12 @@ public class MeetingService {
 
 
 
-    public void createMeet(User creator, Meeting meeting) {
-        meeting.setCreator(creator);
+    public void createMeet(int userId, Meeting meeting) {
+        meeting.setCreator(userRepo.getFirstById(userId));
         meetingRepo.saveAndFlush(meeting);
     }
 
     public void removeMeet(int id) {
-
         meetingRepo.deleteById(id);
         meetingRepo.flush();
     }

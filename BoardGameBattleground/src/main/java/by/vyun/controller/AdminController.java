@@ -55,7 +55,9 @@ public class AdminController {
             currentUser = userService.update(currentUser.getId(), changedUser);
             session.setAttribute("user", currentUser);
             model.addAttribute("user", currentUser);
-            return "account";
+            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("games", gameService.getAllGames());
+            return "admin_page";
         }
         catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
@@ -81,16 +83,26 @@ public class AdminController {
         return "redirect:/";
     }
 
-    @GetMapping("/changeGameStatusById")
-    public String changeGameStatusById(Integer id, HttpSession session, Model model) {
-        gameService.changeGameStatusById(id);
-        session.setAttribute("games", gameService.getAllGames());
+    @GetMapping("/changeGameStatus")
+        public String changeGameStatus(int gameId, HttpSession session, Model model) {
+            gameService.changeGameStatus(gameId);
+            //session.setAttribute("games", gameService.getAllGames());
+            model.addAttribute("user", session.getAttribute("user"));
+            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("games", gameService.getAllGames());
+            return "admin_page";
+    }
+
+
+    @GetMapping("/changeUserStatus")
+    public String changeUserStatus(int userId, HttpSession session, Model model) {
+        userService.changeUserStatus(userId);
+        //session.setAttribute("games", gameService.getAllGames());
         model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("games", gameService.getAllGames());
         return "admin_page";
     }
-
 
 
 

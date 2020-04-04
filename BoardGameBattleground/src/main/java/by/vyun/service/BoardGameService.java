@@ -27,7 +27,7 @@ public class BoardGameService {
         return gameRepo.save(game);
     }
 
-    public void changeGameStatusById(Integer id) {
+    public void changeGameStatus(int id) {
         BoardGame game = gameRepo.getOne(id);
         game.setIsActive(!game.getIsActive());
         gameRepo.saveAndFlush(game);

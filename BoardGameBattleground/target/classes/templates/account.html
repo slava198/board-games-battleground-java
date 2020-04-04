@@ -15,7 +15,7 @@
     <span th:text="${error}" style="background-color: lightpink; "></span>
 </div>
 <div th:if="${error == null}">
-    <table>
+    <table cellpadding="5" cellspacing="0">
         <tr>
             <td id="column_1">
                 <h1 th:text="${user.login}"></h1>
@@ -33,7 +33,13 @@
             </td>
             <td id="column_2">
                 <div>
-                    <h1>My games </h1><a th:href="@{/user/gameList_page}">add</a>
+                    <span>
+                        <h1>My games </h1>
+                    </span>
+                    <span>
+                        <a th:href="@{/user/gameList_page}">add</a>
+                    </span>
+
 <!--                    <form method="get" action="/user/gameList_page">-->
 <!--                        <input type="submit" value="Add games">-->
 <!--                    </form>-->

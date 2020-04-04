@@ -2,7 +2,10 @@ package by.vyun.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -22,9 +25,12 @@ public class User {
     Integer id;
     String login;
     String password;
-    Integer age = 0;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate dateOfBirth;
     String location;
     Integer rating = 0;
+    @Column(columnDefinition = "true")
+    Boolean isActive = true;
 
 
     @ManyToMany(fetch = FetchType.LAZY)

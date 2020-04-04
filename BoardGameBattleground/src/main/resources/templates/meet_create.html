@@ -15,9 +15,18 @@
 </div>
 <a th:href="@{/user/see_game(gameId = ${game.getId()})}">Back</a>
 <form method="post" action="/user/create_meet">
-    <input name ="location" placeholder="location">
-    <input name ="dateTime" type="datetime-local" placeholder="${java.version.date}">
-    <input name="gameId" th:value="${game.getId()}" >
+<!--    <input name ="location" placeholder="location">-->
+    <span>
+            <label>Location: </label>
+        </span>
+    <span>
+            <select name="location">
+
+            <option th:each="location : ${locations}" th:text="${location}" ></option>
+        </select>
+        </span>
+    <input name ="dateTime" type="datetime-local">
+    <input name="gameId" th:value="${game.getId()}" type="hidden">
     <input type="submit" value="Create">
 
     <!--    <button id="saveBtn">Save</button>-->

@@ -22,6 +22,12 @@ public class UserService {
     BoardGameRepo gameRepo;
     MeetingRepo meetingRepo;
 
+    public void changeUserStatus(int userId) {
+        User user = userRepo.getFirstById(userId);
+        user.setIsActive(!user.getIsActive());
+        userRepo.saveAndFlush(user);
+    }
+
     public User getUserById(Integer id) {
         return userRepo.getFirstById(id);
     }
@@ -39,16 +45,6 @@ public class UserService {
         return user;
     }
 
-//    public User signIn(User user) throws RegistrationException {
-//        User foundedUser = userRepo.getFirstByLogin(user.getLogin());
-//        if (foundedUser == null) {
-//            throw new RegistrationException("Login not founded!!!");
-//        }
-//        if (!user.checkPassword(foundedUser.getPassword())) {
-//            throw new RegistrationException("Invalid password!!!");
-//        }
-//        return foundedUser;
-//    }
 
     public User signIn(String login, String password) throws RegistrationException {
         User foundedUser = userRepo.getFirstByLogin(login);
@@ -65,7 +61,7 @@ public class UserService {
     public User update(int id, User changedUser) throws RegistrationException {
             User currentUser = userRepo.getFirstById(id);
             currentUser.setLocation(changedUser.getLocation());
-            currentUser.setAge(changedUser.getAge());
+            currentUser.setDateOfBirth(changedUser.getDateOfBirth());
             currentUser.setPassword(changedUser.getPassword());
             return userRepo.saveAndFlush(currentUser);
     }
@@ -108,7 +104,7 @@ public class UserService {
         if (!currentUser.getMeetingSet().contains(meeting)) {
             currentUser.addMeeting(meeting);
         }
-        meetingRepo.flush();
+        //meetingRepo.flush();
         return userRepo.saveAndFlush(currentUser);
     }
 
@@ -125,7 +121,6 @@ public class UserService {
     }
 
     public List<Meeting> getCreatedMeets(User currentUser) {
-//        List<BoardGame> unsubscribedGames = new ArrayList<>();
         List<Meeting> createdMeets = new ArrayList<>();
         for (Meeting meet : currentUser.getMeetingSet()) {
             if (meet.getCreator().equals(currentUser)) {
@@ -134,9 +129,6 @@ public class UserService {
         }
         return createdMeets;
     }
-
-
-
 
 
     public List<User> getAllUsers() {

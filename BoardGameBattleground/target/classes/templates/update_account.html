@@ -15,6 +15,7 @@
     <span th:text="${error}" style="background-color: lightpink; "></span>
 </div>
 <a href="/user/back">Back</a>
+<h1 th:text="${user.login}"></h1>
 <form method="post" action="/user/update">
     <div>
         <p>Current password: <input name="password" type="password" th:value="${user.password}"></p>
@@ -26,10 +27,24 @@
         <p>Confirm new password: <input name="newPasswordConfirm" type="password" th:value="${user.password}"></p>
     </div>
     <div>
-        <p>Location: <input name="location" th:value="${user.location}"></p>
+        <span>
+            <label>Location: </label>
+        </span>
+        <span>
+            <select name="location">
+            <option value="0" th:text="${user.location}"></option>
+            <option th:each="location : ${locations}" th:text="${location}" ></option>
+        </select>
+        </span>
+
     </div>
     <div>
-        <p>Age: <input name="age" th:value="${user.age}"></p>
+        <span>
+            <label>Date of birth: </label>
+        </span>
+        <span>
+        <input name ="dateOfBirth" type="date" th:value="${user.dateOfBirth}">
+        </span>
     </div>
     <input type="submit" value="Update">
     <!--    <button id="saveBtn">Save</button>-->

@@ -2,6 +2,7 @@ package by.vyun.controller;
 
 import by.vyun.exception.RegistrationException;
 import by.vyun.model.BoardGame;
+import by.vyun.model.Location;
 import by.vyun.model.Meeting;
 import by.vyun.model.User;
 import by.vyun.service.BoardGameService;
@@ -27,13 +28,15 @@ public class UserController {
     MeetingService meetingService;
 
     @GetMapping("/registration_page")
-    public String registrationPage() {
+    public String registrationPage(Model model) {
+        model.addAttribute("locations", Location.values());
         return "registration";
     }
 
     @GetMapping("/update_page")
     public String updatePage(HttpSession session, Model model) {
         model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("locations", Location.values());
         return "update_account";
     }
 
@@ -48,11 +51,12 @@ public class UserController {
     public String createMeet(int gameId, Model model) {
         BoardGame game = gameService.getGameById(gameId);
         model.addAttribute("game", game);
+        model.addAttribute("locations", Location.values());
         return "meet_create";
     }
 
 
-
+//**********************begin user
     @PostMapping("/registration")
     public String registration(User user, String passwordConfirm, Model model) {
         if (!user.checkPassword(passwordConfirm)) {
@@ -130,14 +134,15 @@ public class UserController {
 
     }
 
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
         return "redirect:/";
     }
+//*******************************end user
 
 
+//*****************begin game
     @GetMapping("/add_game")
     public String addGame(Integer gameId, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
@@ -170,10 +175,10 @@ public class UserController {
         return "game_account";
     }
 
+//***********************************end game
 
 
-
-
+//********************************begin meet
     @GetMapping("/delete_meet")
     public String deleteMeet(int meetId, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
@@ -193,15 +198,14 @@ public class UserController {
     public String createMeet(Meeting meet, int gameId, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
         meet.setGame(gameService.getGameById(gameId));
-        meetingService.createMeet(currentUser, meet);
-        currentUser = userService.takePartInMeeting(currentUser.getId(), meet.getId());
+        meetingService.createMeet(currentUser.getId(), meet);
+        //currentUser = userService.takePartInMeeting(currentUser.getId(), meet.getId());
         session.setAttribute("user", currentUser);
         currentUser = userService.getUserById(currentUser.getId());
         model.addAttribute("user", currentUser);
-        model.addAttribute("gameCollection", currentUser.getGameCollection());
-        model.addAttribute("meetingSet", currentUser.getMeetingSet());
-        model.addAttribute("createdMeets", currentUser.getCreatedMeets());
-        return "account";
+        model.addAttribute("game", gameService.getGameById(gameId));
+
+        return "game_account";
     }
 
     @GetMapping("/add_meet")
@@ -228,6 +232,7 @@ public class UserController {
         return "account";
     }
 
+    //**********************************end meet
 
     @GetMapping("/back")
     public String back(HttpSession session, Model model) {
