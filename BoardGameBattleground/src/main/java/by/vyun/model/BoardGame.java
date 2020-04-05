@@ -29,7 +29,8 @@ public class BoardGame {
     String description;
     Integer age = 0;
     Integer rating = 0;
-    @Column(columnDefinition = "true")
+//    @Column(columnDefinition = "true")
+
     Boolean isActive = true;
 
 

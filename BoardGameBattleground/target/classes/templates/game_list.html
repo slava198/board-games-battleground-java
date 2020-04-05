@@ -31,7 +31,7 @@
 <!--                        <th>Meetings</th>-->
                         <th></th>
                     </tr>
-                    <th:block th:each="game: ${games}">
+                    <th:block th:if="${games}" th:each="game: ${games}">
                         <tr th:if="${game.getIsActive()}">
                             <td><img th:src="${game.getLogo()}" height="30px"></td>
                             <td th:text="${game.getTitle()}" height="16px"></td>

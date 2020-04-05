@@ -29,7 +29,7 @@ public class User {
     LocalDate dateOfBirth;
     String location;
     Integer rating = 0;
-    @Column(columnDefinition = "true")
+//    @Column(columnDefinition = "true")
     Boolean isActive = true;
 
 
