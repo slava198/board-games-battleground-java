@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login form</title>
+    <script th:replace="insert/header :: headerElement"></script>
+</head>
+<body>
+<script th:replace="insert/header :: header"></script>
+<div class="container">
+    <div class="card w-50" style="margin: 1.5em auto">
+        <div class="card-header" style="text-align: center"><h3>Board game battleground</h3></div>
+        <div class="card-body">
+            <form action="login" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <div th:if="${param.error != null}" class="alert alert-danger" role="alert">
+                    Failed to login!
+                    <div th:if="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+                        Reason:<span th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+                    </div>
+                </div>
+                <div th:if="${param.logout != null}">
+                    You have been logged out.
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-sm-3 col-md-3 col-form-label">Login:</label>
+                    <div class="col-8 col-sm-9 col-md-9">
+                        <input class="form-control" type="text" id="login" name="login"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-sm-3 col-md-3 col-form-label">Password:</label>
+                    <div class="col-8 col-sm-9 col-md-9">
+                        <input class="form-control" type="password" id="password" name="password"/>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+                <div style="margin-top: 1.5em">
+                    <label>Don't have an account?</label>
+                    <a href="user/registration" style="color: dodgerblue">Registration</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>

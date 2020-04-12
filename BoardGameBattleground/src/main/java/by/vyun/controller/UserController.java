@@ -64,18 +64,29 @@ public class UserController {
     }
 
 
-//**********************begin user
+    //**********************begin user
+//    @GetMapping("/login")
+//    public String loginPage(Model model, String error, String logout) {
+//        if (error != null)
+//            model.addAttribute("error", "Your username and password is invalid.");
+//        if (logout != null)
+//            model.addAttribute("message", "You have been logged out successfully.");
+//        return "login";
+//    }
+
+
     @PostMapping("/registration")
     public String registration(User user, String passwordConfirm, Model model) {
         if (!user.checkPassword(passwordConfirm)) {
             model.addAttribute("error", "Password and it's confirmations are the different!");
+            model.addAttribute("locations", Location.values());
             return "registration";
         }
         try {
             userService.registration(user);
-        }
-        catch (RegistrationException ex) {
+        } catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
+            model.addAttribute("locations", Location.values());
             return "registration";
         }
         return "redirect:/";
@@ -106,8 +117,7 @@ public class UserController {
             model.addAttribute("meetingSet", currentUser.getMeetingSet());
             model.addAttribute("createdMeets", currentUser.getCreatedMeets());
             return "account";
-        }
-        catch (RegistrationException ex) {
+        } catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
         }
         return "redirect:/";
@@ -150,7 +160,7 @@ public class UserController {
 //*******************************end user
 
 
-//*****************begin game
+    //*****************begin game
     @GetMapping("/add_game")
     public String addGame(Integer gameId, HttpSession session, Model model) {
         User currentUser = getCurrentUser();
@@ -186,7 +196,7 @@ public class UserController {
 //***********************************end game
 
 
-//********************************begin meet
+    //********************************begin meet
     @GetMapping("/delete_meet")
     public String deleteMeet(int meetId, HttpSession session, Model model) {
         User currentUser = getCurrentUser();
@@ -257,11 +267,6 @@ public class UserController {
         model.addAttribute("createdMeets", currentUser.getCreatedMeets());
         return "account";
     }
-
-
-
-
-
 
 
 }

@@ -2,25 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6c70a05-ee62-47a5-a328-fda6303482df" name="Default Changelist" comment="fixed bugs from previous commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/RegController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/SecurityUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/insert/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/login(not using).html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/config/MvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/config/MvcConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/IndexController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/game_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/game_account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/meet_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/meet_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/repo/registration.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/update_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/update_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/game_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/game_account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/game_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/game_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/meet_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/meet_create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/registration.html" afterDir="false" />
@@ -66,9 +66,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -117,11 +117,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\GitHub\board-games-battleground-java-fork\board-games-battleground-java\BoardGameBattleground\src\main\java\by\vyun\repo" />
+      <recent name="C:\GitHub\board-games-battleground-java-fork\board-games-battleground-java\BoardGameBattleground\src\main\resources" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\GitHub\board-games-battleground-java-fork\board-games-battleground-java\BoardGameBattleground\src\main\java\by\vyun\controller" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\GitHub\board-games-battleground-java-fork\board-games-battleground-java\BoardGameBattleground\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -209,7 +210,7 @@
       <workItem from="1586612955145" duration="15000" />
       <workItem from="1586613250196" duration="80000" />
       <workItem from="1586613344029" duration="16000" />
-      <workItem from="1586636563562" duration="12655000" />
+      <workItem from="1586636563562" duration="28549000" />
     </task>
     <servers />
   </component>
@@ -258,8 +259,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java</url>
-          <line>252</line>
+          <line>262</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

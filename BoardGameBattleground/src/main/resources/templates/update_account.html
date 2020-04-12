@@ -3,14 +3,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
+<!--    <script-->
+<!--            src="https://code.jquery.com/jquery-3.4.1.min.js"-->
+<!--            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="-->
+<!--            crossorigin="anonymous"></script>-->
 
     <title>Title</title>
+    <script th:replace="insert/header :: headerElement"></script>
 </head>
 <body>
+<script th:replace="insert/header :: header"></script>
 <div th:if="${error}" style="text-align: center">
     <span th:text="${error}" style="background-color: lightpink; "></span>
 </div>

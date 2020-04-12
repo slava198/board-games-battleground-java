@@ -67,10 +67,19 @@ public class AdminController {
 
     @GetMapping("/admin_page")
     public String signIn(HttpSession session, Model model) {
-        model.addAttribute("user", getCurrentUser());
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("games", gameService.getAllGames());
-        return "admin_page";
+        User currentUser = getCurrentUser();
+        if (currentUser.getRoles().contains("ROLE_ADMIN")) {
+            model.addAttribute("user", getCurrentUser());
+            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("games", gameService.getAllGames());
+            return "admin_page";
+        }
+        model.addAttribute("user", currentUser);
+        model.addAttribute("createdMeetings", userService.getCreatedMeets(currentUser));
+        model.addAttribute("gameCollection", currentUser.getGameCollection());
+        model.addAttribute("meetingSet", currentUser.getMeetingSet());
+        model.addAttribute("createdMeets", currentUser.getCreatedMeets());
+        return "account";
 
     }
 
@@ -84,7 +93,7 @@ public class AdminController {
         public String changeGameStatus(int gameId, HttpSession session, Model model) {
             gameService.changeGameStatus(gameId);
             //session.setAttribute("games", gameService.getAllGames());
-            model.addAttribute("user", session.getAttribute("user"));
+            model.addAttribute("user", getCurrentUser());
             model.addAttribute("users", userService.getAllUsers());
             model.addAttribute("games", gameService.getAllGames());
             return "admin_page";
@@ -95,7 +104,7 @@ public class AdminController {
     public String changeUserStatus(int userId, HttpSession session, Model model) {
         userService.changeUserStatus(userId);
         //session.setAttribute("games", gameService.getAllGames());
-        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("user", getCurrentUser());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("games", gameService.getAllGames());
         return "admin_page";
