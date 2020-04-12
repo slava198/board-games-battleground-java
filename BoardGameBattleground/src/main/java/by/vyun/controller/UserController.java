@@ -10,6 +10,8 @@ import by.vyun.service.MeetingService;
 import by.vyun.service.UserService;
 
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 
 @Controller
 @AllArgsConstructor
@@ -27,7 +30,11 @@ public class UserController {
     BoardGameService gameService;
     MeetingService meetingService;
 
-    @GetMapping("/registration_page")
+    User getCurrentUser() {
+        return userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    @GetMapping("/registration")
     public String registrationPage(Model model) {
         model.addAttribute("locations", Location.values());
         return "registration";
@@ -35,15 +42,16 @@ public class UserController {
 
     @GetMapping("/update_page")
     public String updatePage(HttpSession session, Model model) {
-        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("user", getCurrentUser());
         model.addAttribute("locations", Location.values());
         return "update_account";
     }
 
     @GetMapping("/gameList_page")
     public String gameListPage(HttpSession session, Model model) {
-        model.addAttribute("user", session.getAttribute("user"));
-        model.addAttribute("games", userService.getUnsubscribedGames((User) session.getAttribute("user")));
+        User currentUser = getCurrentUser();
+        model.addAttribute("user", currentUser);
+        model.addAttribute("games", userService.getUnsubscribedGames(currentUser));
         return "game_list";
     }
 
@@ -76,22 +84,22 @@ public class UserController {
 
 
     @PostMapping("/update")
-    public String update(User changedUser, String newPassword, String newPasswordConfirm, Model model, HttpSession session) {
+    public String update(User changedUser, String newPassword, String newPasswordConfirm, Model model, HttpSession sesssion) {
         try {
-            User currentUser = (User) session.getAttribute("user");
+            User currentUser = getCurrentUser();
             if (!currentUser.checkPassword(changedUser.getPassword())) {
                 model.addAttribute("error", "Invalid current password!");
-                model.addAttribute("user", session.getAttribute("user"));
+                model.addAttribute("user", currentUser);
                 return "update_account";
             }
             if (!newPassword.equals(newPasswordConfirm)) {
                 model.addAttribute("error", "New password and it's confirmations are the different!");
-                model.addAttribute("user", session.getAttribute("user"));
+                model.addAttribute("user", currentUser);
                 return "update_account";
             }
             changedUser.setPassword(newPassword);
             currentUser = userService.update(currentUser.getId(), changedUser);
-            session.setAttribute("user", currentUser);
+            //session.setAttribute("user", currentUser);
             currentUser = userService.getUserById(currentUser.getId());
             model.addAttribute("user", currentUser);
             model.addAttribute("gameCollection", currentUser.getGameCollection());
@@ -107,56 +115,56 @@ public class UserController {
     }
 
 
-    @PostMapping("/sign_in")
-    public String signIn(String login, String password, HttpSession session, Model model) {
-        User signedUser = null;
+//    @PostMapping("/sign_in")
+//    public String signIn(String login, String password, HttpSession session, Model model) {
+//        User signedUser = null;
+//
+//        try {
+//            signedUser = userService.signIn(login, password);
+//            session.setAttribute("user", signedUser);
+//            //session.setAttribute("userId", signedUser.getId());
+//            if (signedUser.getLogin().equals("admin")) {
+//                return "redirect:/admin/sign_in";
+//            }
+//        }
+//        catch (RegistrationException ex) {
+//            //model.addAttribute("error", ex.getMessage());
+//            session.setAttribute("error", ex.getMessage());
+//            return "redirect:/";
+//        }
+//        model.addAttribute("user", session.getAttribute("user"));
+//        model.addAttribute("createdMeetings", userService.getCreatedMeets(signedUser));
+//        model.addAttribute("gameCollection", signedUser.getGameCollection());
+//        model.addAttribute("meetingSet", signedUser.getMeetingSet());
+//        model.addAttribute("createdMeets", signedUser.getCreatedMeets());
+//
+//        return "account";
+//
+//    }
 
-        try {
-            signedUser = userService.signIn(login, password);
-            session.setAttribute("user", signedUser);
-            //session.setAttribute("userId", signedUser.getId());
-            if (signedUser.getLogin().equals("admin")) {
-                return "redirect:/admin/sign_in";
-            }
-        }
-        catch (RegistrationException ex) {
-            //model.addAttribute("error", ex.getMessage());
-            session.setAttribute("error", ex.getMessage());
-            return "redirect:/";
-        }
-        model.addAttribute("user", session.getAttribute("user"));
-        model.addAttribute("createdMeetings", userService.getCreatedMeets(signedUser));
-        model.addAttribute("gameCollection", signedUser.getGameCollection());
-        model.addAttribute("meetingSet", signedUser.getMeetingSet());
-        model.addAttribute("createdMeets", signedUser.getCreatedMeets());
-
-        return "account";
-
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("user");
-        return "redirect:/";
-    }
+//    @GetMapping("/logout")
+//    public String logout(HttpSession session) {
+//        session.removeAttribute("user");
+//        return "redirect:/";
+//    }
 //*******************************end user
 
 
 //*****************begin game
     @GetMapping("/add_game")
     public String addGame(Integer gameId, HttpSession session, Model model) {
-        User currentUser = (User) session.getAttribute("user");
+        User currentUser = getCurrentUser();
         currentUser = userService.addGame(currentUser.getId(), gameId);
-        session.setAttribute("user", currentUser);
+
         model.addAttribute("user", currentUser);
-        model.addAttribute("games", userService.getUnsubscribedGames((User) session.getAttribute("user")));
+        model.addAttribute("games", userService.getUnsubscribedGames(getCurrentUser()));
         return "game_list";
     }
 
     @GetMapping("/remove_game")
     public String removeGame(Integer gameId, HttpSession session, Model model) {
-        User currentUser = userService.deleteGame(((User)(session.getAttribute("user"))).getId(), gameId);
-        session.setAttribute("user", currentUser);
+        User currentUser = userService.deleteGame(getCurrentUser().getId(), gameId);
+        //session.setAttribute("user", currentUser);
         currentUser = userService.getUserById(currentUser.getId());
         model.addAttribute("user", currentUser);
         model.addAttribute("gameCollection", currentUser.getGameCollection());
@@ -171,7 +179,7 @@ public class UserController {
         BoardGame game = gameService.getGameById(gameId);
         //session.setAttribute("user", user);
         model.addAttribute("game", game);
-        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("user", getCurrentUser());
         return "game_account";
     }
 
@@ -181,11 +189,11 @@ public class UserController {
 //********************************begin meet
     @GetMapping("/delete_meet")
     public String deleteMeet(int meetId, HttpSession session, Model model) {
-        User currentUser = (User) session.getAttribute("user");
+        User currentUser = getCurrentUser();
         currentUser = userService.deleteMeeting(currentUser.getId(), meetId);
         //currentUser.getCreatedMeets().remove()---
         meetingService.removeMeet(meetId);
-        session.setAttribute("user", currentUser);
+        //session.setAttribute("user", currentUser);
         currentUser = userService.getUserById(currentUser.getId());
         model.addAttribute("user", currentUser);
         model.addAttribute("gameCollection", currentUser.getGameCollection());
@@ -195,12 +203,17 @@ public class UserController {
     }
 
     @PostMapping("/create_meet")
-    public String createMeet(Meeting meet, int gameId, HttpSession session, Model model) {
-        User currentUser = (User) session.getAttribute("user");
+    public String createMeet(Location location,
+                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,
+                             int gameId, HttpSession session, Model model) {
+        User currentUser = getCurrentUser();
+        Meeting meet = new Meeting();
+        meet.setLocation(location.name());
+        meet.setDateTime(dateTime);
         meet.setGame(gameService.getGameById(gameId));
         meetingService.createMeet(currentUser.getId(), meet);
         //currentUser = userService.takePartInMeeting(currentUser.getId(), meet.getId());
-        session.setAttribute("user", currentUser);
+        //session.setAttribute("user", currentUser);
         currentUser = userService.getUserById(currentUser.getId());
         model.addAttribute("user", currentUser);
         model.addAttribute("game", gameService.getGameById(gameId));
@@ -210,9 +223,9 @@ public class UserController {
 
     @GetMapping("/add_meet")
     public String addMeeting(int meetId, HttpSession session, Model model) {
-        User currentUser = (User) session.getAttribute("user");
+        User currentUser = getCurrentUser();
         currentUser = userService.takePartInMeeting(currentUser.getId(), meetId);
-        session.setAttribute("user", currentUser); //-???
+        //session.setAttribute("user", currentUser); //-???
         model.addAttribute("game", meetingService.getMeetingById(meetId).getGame());
         model.addAttribute("user", currentUser);
         return "game_account";
@@ -220,9 +233,9 @@ public class UserController {
 
     @GetMapping("/leave_meet")
     public String leaveMeeting(int meetId, HttpSession session, Model model) {
-        User currentUser = (User) session.getAttribute("user");
+        User currentUser = getCurrentUser();
         currentUser = userService.leaveMeeting(currentUser.getId(), meetId);
-        session.setAttribute("user", currentUser);
+        //session.setAttribute("user", currentUser);
         //model.addAttribute("game", meetingService.getMeetingById(meetId).getGame());
         currentUser = userService.getUserById(currentUser.getId());
         model.addAttribute("user", currentUser);
@@ -236,7 +249,7 @@ public class UserController {
 
     @GetMapping("/back")
     public String back(HttpSession session, Model model) {
-        User currentUser = (User) session.getAttribute("user");
+        User currentUser = getCurrentUser();
         currentUser = userService.getUserById(currentUser.getId());
         model.addAttribute("user", currentUser);
         model.addAttribute("gameCollection", currentUser.getGameCollection());

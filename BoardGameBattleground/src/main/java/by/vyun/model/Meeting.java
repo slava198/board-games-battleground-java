@@ -6,8 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,7 +28,9 @@ public class Meeting {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     String location;
-    String dateTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    LocalDateTime dateTime;
+
 
     @ManyToOne
     @JoinColumn(name = "creatorId")

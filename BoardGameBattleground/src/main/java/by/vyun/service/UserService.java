@@ -31,6 +31,9 @@ public class UserService {
     public User getUserById(Integer id) {
         return userRepo.getFirstById(id);
     }
+    public User getUserByLogin(String login) {
+        return userRepo.getFirstByLogin(login);
+    }
 
 
     public User registration(User user) throws RegistrationException {
@@ -41,6 +44,7 @@ public class UserService {
         if (userRepo.getFirstByLogin(user.getLogin()) != null) {
             throw new RegistrationException("Login duplicated!!!");
         }
+
         user = userRepo.save(user);
         return user;
     }

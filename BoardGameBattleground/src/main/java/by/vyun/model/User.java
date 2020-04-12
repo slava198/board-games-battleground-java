@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -25,12 +25,15 @@ public class User {
     Integer id;
     String login;
     String password;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate dateOfBirth;
     String location;
     Integer rating = 0;
-//    @Column(columnDefinition = "true")
     Boolean isActive = true;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    Set<String> roles = Collections.singleton("ROLE_USER");
 
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -51,7 +54,6 @@ public class User {
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
     List<Meeting> createdMeets;
-
 
 
     public boolean checkPassword(String password) {

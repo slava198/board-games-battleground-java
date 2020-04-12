@@ -2,13 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6c70a05-ee62-47a5-a328-fda6303482df" name="Default Changelist" comment="fixed bugs from previous commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/RegController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/SecurityUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/Meeting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/meet_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/meet_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/update_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/update_account.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/game_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/game_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/meet_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/meet_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/update_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/update_account.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,9 +66,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -185,7 +201,15 @@
       <workItem from="1586008700041" duration="15390000" />
       <workItem from="1586039086585" duration="1371000" />
       <workItem from="1586073700809" duration="671000" />
-      <workItem from="1586123721503" duration="5053000" />
+      <workItem from="1586123721503" duration="5960000" />
+      <workItem from="1586170584226" duration="7220000" />
+      <workItem from="1586286823248" duration="1321000" />
+      <workItem from="1586288170068" duration="1142000" />
+      <workItem from="1586587135469" duration="10000" />
+      <workItem from="1586612955145" duration="15000" />
+      <workItem from="1586613250196" duration="80000" />
+      <workItem from="1586613344029" duration="16000" />
+      <workItem from="1586636563562" duration="12655000" />
     </task>
     <servers />
   </component>
@@ -214,8 +238,28 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java</url>
-          <line>89</line>
+          <line>93</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/vyun/service/MeetingService.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/vyun/service/SecurityUserService.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/vyun/controller/IndexController.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/vyun/controller/UserController.java</url>
+          <line>252</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

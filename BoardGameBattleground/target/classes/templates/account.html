@@ -14,6 +14,9 @@
 <div th:if="${error != null}" style="text-align: center">
     <span th:text="${error}" style="background-color: lightpink; "></span>
 </div>
+
+    <a href="/admin/admin_page">ADMIN page</a>
+
 <div th:if="${error == null}">
     <table cellpadding="5" cellspacing="0">
         <tr>
@@ -23,7 +26,7 @@
                     <a href="/user/update_page">Change account</a>
                 </div>
                 <div>
-                    <a href="/user/logout">Exit</a>
+                    <a href="/logout">Exit</a>
                 </div>
             </td>
         </tr>
