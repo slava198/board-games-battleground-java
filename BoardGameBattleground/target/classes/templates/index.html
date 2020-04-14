@@ -4,15 +4,10 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-<!--    <script-->
-<!--            src="https://code.jquery.com/jquery-3.4.1.min.js"-->
-<!--            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="-->
-<!--            crossorigin="anonymous"></script>-->
 
     <title>Boardgame Battleground</title>
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
-<!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+
+
     <script th:replace="insert/header :: headerElement"></script>
 </head>
 <body>
@@ -21,83 +16,85 @@
     <span th:text="${error}" style="background-color: lightpink; "></span>
 </div>
 
-<div class="container ">
-    <div class="row">
-<!--    <div class="col">-->
-<!--        <a href="/login">Sign in</a>-->
-<!--        <a href="/user/registration">Register</a>-->
-<!--        <form method="post" action="/user/sign_in">-->
-<!--            <input name="login" placeholder="login">-->
-<!--            <input name="password" placeholder="password">-->
-<!--            <input class="btn btn-primary m-1" type="submit" value="Sign in">-->
-<!--        </form>-->
-<!--        <form method="get" action="/user/registration_page">-->
-<!--            <input class="btn btn-primary m-1" type="submit" value="Reg">-->
-<!--        </form>-->
-<!--    </div>-->
-    <div class="col">
-        <table>
-            <tr>
-                <th></th>
-                <th>Title</th>
-                <th>Rating</th>
-                <th>Meetings</th>
-                <!--            <th>Owners</th>-->
-                <!--            <th>Meetings</th>-->
-            </tr>
-            <th:block th:each="game : ${games}">
-                <tr th:if="${game.getIsActive()}">
-                    <td><img th:src="${game.getLogo()}" height="30px"></td>
-                    <td th:text="${game.getTitle()}" height="16px"></td>
-                    <td th:text="${game.getRating()}" align="right"></td>
-                    <td th:text="${game.getNumberOfMeetings()}" align="right"></td>
-                    <!--            <td th:text="${game.getNumberOfOwners()}" align="right"></td>-->
-                    <!--            <td th:text="${game.getNumberOfMeetings()}" align="right"></td>-->
-                    <!--            <td><a th:href="@{/removeById(login=${game.login})}">Delete</a></td>-->
-                </tr>
-            </th:block>
-        </table>
+<div class="container-fluid">
+    <h1>Actual board games</h1>
+    <div class="row justify-content-center">
+        <th:block th:each="game : ${games}">
+                    <div class="col-12 col-md-4 col-lg-2 ml-auto mr-auto mx-auto" th:if="${game.getIsActive()}">
+                        <img th:src="${game.getLogo()}" height="200px">
+                    </div>
+        </th:block>
     </div>
+    <h1>Actual meetings</h1>
+    <div class="row justify-content-center">
+                <th:block th:each="meeting : ${meetings}">
+                    <div class="col-12 col-md-4 col-lg-2 ml-auto mr-auto mx-auto">
+                        <p th:text="${meeting.getGame().getTitle()}" ></p>
+                        <img th:src="${meeting.getCity().getLogo()}" height="200px">
+                        <p th:text="${meeting.getLocation()}"></p>
+                        <p th:text="${meeting.getDateTime()}"></p>
+                    </div>
+                </th:block>
+            </div>
 
-    <div class="col">
-
-        <table id="filter-table">
-            <tr>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Date</th>
-                <th>Members</th>
-            </tr>
-            <th:block th:each="meeting : ${meetings}">
-                <tr>
-                    <td th:text="${meeting.getGame().getTitle()}" height="30px"></td>
-                    <td th:text="${meeting.getLocation()}" height="16px"></td>
-                    <td th:text="${meeting.getDateTime()}" align="right"></td>
-                    <!--                            <td th:text="${#dates.format(meeting.getDateTime(), 'dd-MMM-yyyy HH:mm')}" align="right"></td>-->
-                    <td th:text="${meeting.getMembers().size()}" align="right"></td>
-                    <!--                                <td><a th:href="@{/user/remove_game(gameId = ${meeting.id})}">Delete</a></td>-->
-                </tr>
-            </th:block>
-        </table>
-
-    </div>
-    </div>
 </div>
 
-<!--<div sec:authorize="isAuthenticated()">-->
-<!--    Authenticated as <span sec:authentication="name"></span></div>-->
-<!--<a href="registration.html">Registration</a>-->
 
 
-<!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"-->
-<!--        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"-->
-<!--        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"-->
-<!--        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"-->
-<!--        crossorigin="anonymous"></script>-->
+
+<!--<div class="container ">-->
+<!--    <div class="row">-->
+
+<!--    <div class="col">-->
+<!--        <table class="table">-->
+<!--            <tr>-->
+<!--                <th></th>-->
+<!--                <th>Title</th>-->
+<!--                <th>Rating</th>-->
+<!--                <th>Meetings</th>-->
+<!--                &lt;!&ndash;            <th>Owners</th>&ndash;&gt;-->
+<!--                &lt;!&ndash;            <th>Meetings</th>&ndash;&gt;-->
+<!--            </tr>-->
+<!--            <th:block th:each="game : ${games}">-->
+<!--                <tr th:if="${game.getIsActive()}">-->
+<!--                    <td><img th:src="${game.getLogo()}" height="30px"></td>-->
+<!--                    <td th:text="${game.getTitle()}" height="16px"></td>-->
+<!--                    <td th:text="${game.getRating()}" align="right"></td>-->
+<!--                    <td th:text="${game.getNumberOfMeetings()}" align="right"></td>-->
+<!--                    &lt;!&ndash;            <td th:text="${game.getNumberOfOwners()}" align="right"></td>&ndash;&gt;-->
+<!--                    &lt;!&ndash;            <td th:text="${game.getNumberOfMeetings()}" align="right"></td>&ndash;&gt;-->
+<!--                    &lt;!&ndash;            <td><a th:href="@{/removeById(login=${game.login})}">Delete</a></td>&ndash;&gt;-->
+<!--                </tr>-->
+<!--            </th:block>-->
+<!--        </table>-->
+<!--    </div>-->
+
+<!--    <div class="col">-->
+
+<!--        <table class="table">-->
+<!--            <tr>-->
+<!--                <th>Title</th>-->
+<!--                <th>Location</th>-->
+<!--                <th>Date</th>-->
+<!--                <th>Members</th>-->
+<!--            </tr>-->
+<!--            <th:block th:each="meeting : ${meetings}">-->
+<!--                <tr>-->
+<!--                    <td th:text="${meeting.getGame().getTitle()}" height="30px"></td>-->
+<!--                    <td th:text="${meeting.getLocation()}" height="16px"></td>-->
+<!--                    <td th:text="${meeting.getDateTime()}" align="right"></td>-->
+<!--                    &lt;!&ndash;                            <td th:text="${#dates.format(meeting.getDateTime(), 'dd-MMM-yyyy HH:mm')}" align="right"></td>&ndash;&gt;-->
+<!--                    <td th:text="${meeting.getMembers().size()}" align="right"></td>-->
+<!--                    &lt;!&ndash;                                <td><a th:href="@{/user/remove_game(gameId = ${meeting.id})}">Delete</a></td>&ndash;&gt;-->
+<!--                </tr>-->
+<!--            </th:block>-->
+<!--        </table>-->
+
+<!--    </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
 </body>
 
 </html>

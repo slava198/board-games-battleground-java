@@ -1,10 +1,9 @@
 package by.vyun.service;
 
 
-import by.vyun.model.BoardGame;
+import by.vyun.model.City;
 import by.vyun.model.Meeting;
-import by.vyun.model.User;
-import by.vyun.repo.BoardGameRepo;
+import by.vyun.repo.CityRepo;
 import by.vyun.repo.MeetingRepo;
 import by.vyun.repo.UserRepo;
 import lombok.AllArgsConstructor;
@@ -17,6 +16,7 @@ import java.util.List;
 public class MeetingService {
     MeetingRepo meetingRepo;
     UserRepo userRepo;
+    CityRepo cityRepo;
 
 
     public List<Meeting> getAllMeetings() {
@@ -29,7 +29,8 @@ public class MeetingService {
 
 
 
-    public void createMeet(int userId, Meeting meeting) {
+    public void createMeet(int userId, Meeting meeting, String cityName) {
+        meeting.setCity(cityRepo.getFirstByName(cityName));
         meeting.setCreator(userRepo.getFirstById(userId));
         meetingRepo.saveAndFlush(meeting);
     }
@@ -37,6 +38,10 @@ public class MeetingService {
     public void removeMeet(int id) {
         meetingRepo.deleteById(id);
         meetingRepo.flush();
+    }
+
+    public List<City> getAllCities() {
+        return cityRepo.findAll();
     }
 
 

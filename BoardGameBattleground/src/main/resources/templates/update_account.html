@@ -34,9 +34,8 @@
             <label>Location: </label>
         </span>
         <span>
-            <select name="location">
-            <option value="0" th:text="${user.location}"></option>
-            <option th:each="location : ${locations}" th:text="${location}" ></option>
+            <select name="cityName">
+            <option th:each="city : ${cities}" th:text="${city}" ></option>
         </select>
         </span>
 

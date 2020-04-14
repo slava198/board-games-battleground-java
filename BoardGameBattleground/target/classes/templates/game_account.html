@@ -41,17 +41,11 @@
                 </div>
             </td>
             <td id="column_3">
+                    <span>
+                        <h1>Meetings <a th:href="@{/user/createMeet_page(gameId = ${game.id})}">+</a></h1>
+                    </span>
 
-                    <span>
-                        <h1>Meetings </h1>
-                    </span>
-                    <span>
-                        <a th:href="@{/user/createMeet_page(gameId = ${game.id})}">add</a>
-                    </span>
-<!--                    <form method="get" action="/user/add_meeting">-->
-<!--                        <input type="submit" value="Add meeting">-->
-<!--                    </form>-->
-                    <table>
+                    <table class="table">
                         <tr>
 
                             <th>Location</th>

@@ -31,9 +31,9 @@ public class UserRestController {
 
     //************************************** USERS CRUD
     @PostMapping("/user")
-    public String registration(User user) {
+    public String registration(User user, String cityName) {
         try {
-            userService.registration(user);
+            userService.registration(user, cityName);
         }
         catch (RegistrationException ex) {
             System.out.println(ex.getMessage());
@@ -89,10 +89,10 @@ public class UserRestController {
     //*********************************** MEETINGS CRUD
 
     @PostMapping("/user/meet")
-    public String createMeet(int userId, int gameId, Meeting meet) {
+    public String createMeet(int userId, int gameId, Meeting meet, String cityName) {
         User currentUser = userService.getUserById(userId);
         meet.setGame(gameService.getGameById(gameId));
-        meetingService.createMeet(currentUser.getId(), meet);
+        meetingService.createMeet(currentUser.getId(), meet, cityName);
         //userService.takePartInMeeting(currentUser.getId(), meet.getId());
         return "ok";
     }

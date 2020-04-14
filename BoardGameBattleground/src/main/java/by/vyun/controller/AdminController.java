@@ -2,8 +2,10 @@ package by.vyun.controller;
 
 import by.vyun.model.BoardGame;
 import by.vyun.exception.RegistrationException;
+import by.vyun.model.City;
 import by.vyun.model.User;
 import by.vyun.service.BoardGameService;
+import by.vyun.service.CityService;
 import by.vyun.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpSession;
 public class AdminController {
     UserService userService;
     BoardGameService gameService;
+    CityService cityService;
 
     User getCurrentUser() {
         return userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -33,17 +36,41 @@ public class AdminController {
 //
 //    }
 
+    @GetMapping("/createGame_page")
+    public String createGame() {
+        return "game_create";
+
+    }
+
     @PostMapping("/add_game")
     public String addGame(BoardGame game, Model model, HttpSession session) {
         gameService.add(game);
-        model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("user", getCurrentUser());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("games", gameService.getAllGames());
+        model.addAttribute("cities", cityService.getAllCities());
         return "admin_page";
-
-
-
     }
+
+    @GetMapping("/add_city")
+    public String addCity() {
+        return "city_create";
+    }
+
+    @PostMapping("/add_city")
+    public String addCity(City city, Model model) {
+
+        cityService.add(city);
+        model.addAttribute("user", getCurrentUser());
+        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("games", gameService.getAllGames());
+        model.addAttribute("cities", cityService.getAllCities());
+        return "admin_page";
+    }
+
+
+
+
 
 
     @PostMapping("/update")
@@ -55,6 +82,7 @@ public class AdminController {
             model.addAttribute("user", currentUser);
             model.addAttribute("users", userService.getAllUsers());
             model.addAttribute("games", gameService.getAllGames());
+            model.addAttribute("cities", cityService.getAllCities());
             return "admin_page";
         }
         catch (RegistrationException ex) {
@@ -72,6 +100,7 @@ public class AdminController {
             model.addAttribute("user", getCurrentUser());
             model.addAttribute("users", userService.getAllUsers());
             model.addAttribute("games", gameService.getAllGames());
+            model.addAttribute("cities", cityService.getAllCities());
             return "admin_page";
         }
         model.addAttribute("user", currentUser);
@@ -96,6 +125,7 @@ public class AdminController {
             model.addAttribute("user", getCurrentUser());
             model.addAttribute("users", userService.getAllUsers());
             model.addAttribute("games", gameService.getAllGames());
+            model.addAttribute("cities", cityService.getAllCities());
             return "admin_page";
     }
 
@@ -107,6 +137,7 @@ public class AdminController {
         model.addAttribute("user", getCurrentUser());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("games", gameService.getAllGames());
+        model.addAttribute("cities", cityService.getAllCities());
         return "admin_page";
     }
 

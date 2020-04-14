@@ -28,7 +28,10 @@ public class User {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate dateOfBirth;
-    String location;
+
+    @ManyToOne()
+    @JoinColumn(name = "cityId")
+    City city;
     Integer rating = 0;
     Boolean isActive = true;
 

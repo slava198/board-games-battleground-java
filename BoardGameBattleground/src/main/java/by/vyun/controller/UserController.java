@@ -1,11 +1,9 @@
 package by.vyun.controller;
 
 import by.vyun.exception.RegistrationException;
-import by.vyun.model.BoardGame;
-import by.vyun.model.Location;
-import by.vyun.model.Meeting;
-import by.vyun.model.User;
+import by.vyun.model.*;
 import by.vyun.service.BoardGameService;
+import by.vyun.service.CityService;
 import by.vyun.service.MeetingService;
 import by.vyun.service.UserService;
 
@@ -29,6 +27,7 @@ public class UserController {
     UserService userService;
     BoardGameService gameService;
     MeetingService meetingService;
+    CityService cityService;
 
     User getCurrentUser() {
         return userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -36,14 +35,14 @@ public class UserController {
 
     @GetMapping("/registration")
     public String registrationPage(Model model) {
-        model.addAttribute("locations", Location.values());
+        model.addAttribute("cities", cityService.getAllCityNames());
         return "registration";
     }
 
     @GetMapping("/update_page")
     public String updatePage(HttpSession session, Model model) {
         model.addAttribute("user", getCurrentUser());
-        model.addAttribute("locations", Location.values());
+        model.addAttribute("cities", cityService.getAllCityNames());
         return "update_account";
     }
 
@@ -59,7 +58,7 @@ public class UserController {
     public String createMeet(int gameId, Model model) {
         BoardGame game = gameService.getGameById(gameId);
         model.addAttribute("game", game);
-        model.addAttribute("locations", Location.values());
+        model.addAttribute("cities", cityService.getAllCityNames());
         return "meet_create";
     }
 
@@ -76,17 +75,17 @@ public class UserController {
 
 
     @PostMapping("/registration")
-    public String registration(User user, String passwordConfirm, Model model) {
+    public String registration(User user, String passwordConfirm, String cityName, Model model) {
         if (!user.checkPassword(passwordConfirm)) {
             model.addAttribute("error", "Password and it's confirmations are the different!");
-            model.addAttribute("locations", Location.values());
+            model.addAttribute("cities", cityService.getAllCityNames());
             return "registration";
         }
         try {
-            userService.registration(user);
+            userService.registration(user, cityName);
         } catch (RegistrationException ex) {
             model.addAttribute("error", ex.getMessage());
-            model.addAttribute("locations", Location.values());
+            model.addAttribute("cities", cityService.getAllCityNames());
             return "registration";
         }
         return "redirect:/";
@@ -95,7 +94,7 @@ public class UserController {
 
 
     @PostMapping("/update")
-    public String update(User changedUser, String newPassword, String newPasswordConfirm, Model model, HttpSession sesssion) {
+    public String update(User changedUser, String newPassword, String newPasswordConfirm, String cityName, Model model) {
         try {
             User currentUser = getCurrentUser();
             if (!currentUser.checkPassword(changedUser.getPassword())) {
@@ -108,9 +107,11 @@ public class UserController {
                 model.addAttribute("user", currentUser);
                 return "update_account";
             }
+
             changedUser.setPassword(newPassword);
+            changedUser.setCity(cityService.getCityByName(cityName));
             currentUser = userService.update(currentUser.getId(), changedUser);
-            //session.setAttribute("user", currentUser);
+
             currentUser = userService.getUserById(currentUser.getId());
             model.addAttribute("user", currentUser);
             model.addAttribute("gameCollection", currentUser.getGameCollection());
@@ -213,15 +214,15 @@ public class UserController {
     }
 
     @PostMapping("/create_meet")
-    public String createMeet(Location location,
+    public String createMeet(String cityName, String location,
                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,
                              int gameId, HttpSession session, Model model) {
         User currentUser = getCurrentUser();
         Meeting meet = new Meeting();
-        meet.setLocation(location.name());
+        meet.setLocation(location);
         meet.setDateTime(dateTime);
         meet.setGame(gameService.getGameById(gameId));
-        meetingService.createMeet(currentUser.getId(), meet);
+        meetingService.createMeet(currentUser.getId(), meet, cityName);
         //currentUser = userService.takePartInMeeting(currentUser.getId(), meet.getId());
         //session.setAttribute("user", currentUser);
         currentUser = userService.getUserById(currentUser.getId());

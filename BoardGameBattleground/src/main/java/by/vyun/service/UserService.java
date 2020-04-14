@@ -5,6 +5,7 @@ import by.vyun.exception.RegistrationException;
 import by.vyun.model.Meeting;
 import by.vyun.model.User;
 import by.vyun.repo.BoardGameRepo;
+import by.vyun.repo.CityRepo;
 import by.vyun.repo.MeetingRepo;
 import by.vyun.repo.UserRepo;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class UserService {
     UserRepo userRepo;
     BoardGameRepo gameRepo;
     MeetingRepo meetingRepo;
+    CityRepo cityRepo;
 
     public void changeUserStatus(int userId) {
         User user = userRepo.getFirstById(userId);
@@ -36,15 +38,15 @@ public class UserService {
     }
 
 
-    public User registration(User user) throws RegistrationException {
+    public User registration(User user, String cityName) throws RegistrationException {
 
-        if (user.getLogin().trim().length() * user.getPassword().trim().length() * user.getLocation().trim().length() == 0) {
+        if (user.getLogin().trim().length() * user.getPassword().trim().length() * cityName.trim().length() == 0) {
             throw new RegistrationException("Empty login, password or location field!!!");
         }
         if (userRepo.getFirstByLogin(user.getLogin()) != null) {
             throw new RegistrationException("Login duplicated!!!");
         }
-
+        user.setCity(cityRepo.getFirstByName(cityName));
         user = userRepo.save(user);
         return user;
     }
@@ -64,7 +66,7 @@ public class UserService {
 
     public User update(int id, User changedUser) throws RegistrationException {
             User currentUser = userRepo.getFirstById(id);
-            currentUser.setLocation(changedUser.getLocation());
+            currentUser.setCity(changedUser.getCity());
             currentUser.setDateOfBirth(changedUser.getDateOfBirth());
             currentUser.setPassword(changedUser.getPassword());
             return userRepo.saveAndFlush(currentUser);
@@ -138,5 +140,7 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
+
+
 
 }
