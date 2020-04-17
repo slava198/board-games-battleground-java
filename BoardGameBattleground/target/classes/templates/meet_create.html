@@ -9,12 +9,21 @@
 </head>
 <body>
 <script th:replace="insert/header :: navbar"></script>
-<div>
-    <h3 th:text="${game.getTitle()}"></h3>
+<div class="container">
+    <div class="row">
+        <a th:href="@{/user/see_game(gameId = ${game.getId()})}">Back</a>
+    </div>
+
+    <div class="row">
+        <h3 th:text="${game.getTitle()}"></h3>
+    </div>
 </div>
-<a th:href="@{/user/see_game(gameId = ${game.getId()})}">Back</a>
+
+
+
+
 <div class="card w-50" style="margin: 1.5em auto">
-    <div class="card-header"><h3>Registration form</h3></div>
+    <div class="card-header"><h3>Create meeting</h3></div>
     <div class="card-body">
         <form method="post" action="/user/create_meet">
             <!--                ERROR-->
