@@ -2,38 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6c70a05-ee62-47a5-a328-fda6303482df" name="Default Changelist" comment="fixed bugs from previous commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/exception/BoardGameException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/vyun/exception/CityException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/controller/UserRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/model/BoardGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/repo/BoardGameRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/repo/BoardGameRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/BoardGameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/BoardGameService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/CityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/CityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/vyun/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/city_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/city_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/game_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/game_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/game_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/game_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/game_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/insert/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/insert/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/meet_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/meet_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/update_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/update_account.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/city_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/city_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/game_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/game_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/game_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/game_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/game_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/game_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/insert/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/insert/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/meet_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/meet_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/update_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/update_account.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -226,7 +199,7 @@
       <workItem from="1586977426467" duration="7231000" />
       <workItem from="1587102906967" duration="12938000" />
       <workItem from="1587120715578" duration="10736000" />
-      <workItem from="1587132544973" duration="2529000" />
+      <workItem from="1587132544973" duration="4916000" />
     </task>
     <servers />
   </component>
