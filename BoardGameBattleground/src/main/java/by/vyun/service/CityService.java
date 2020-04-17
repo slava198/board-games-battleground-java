@@ -1,6 +1,7 @@
 package by.vyun.service;
 
 
+import by.vyun.exception.CityException;
 import by.vyun.model.BoardGame;
 import by.vyun.model.City;
 import by.vyun.repo.CityRepo;
@@ -15,7 +16,14 @@ import java.util.List;
 public class CityService {
     CityRepo cityRepo;
 
-    public City add(City city) {
+    public City add(City city) throws CityException {
+        if (city.getName().trim().length() * city.getLogo().trim().length() == 0) {
+            throw new CityException("Empty name or logo field!");
+        }
+        if (cityRepo.getFirstByName(city.getName()) != null) {
+            throw new CityException("City name duplicated!");
+        }
+
         return cityRepo.save(city);
     }
 

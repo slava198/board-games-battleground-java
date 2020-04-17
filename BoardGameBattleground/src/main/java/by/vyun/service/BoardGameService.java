@@ -1,6 +1,8 @@
 package by.vyun.service;
 
 
+import by.vyun.exception.BoardGameException;
+import by.vyun.exception.RegistrationException;
 import by.vyun.model.BoardGame;
 import by.vyun.repo.BoardGameRepo;
 import lombok.AllArgsConstructor;
@@ -23,7 +25,13 @@ public class BoardGameService {
     }
 
 
-    public BoardGame add(BoardGame game) {
+    public BoardGame add(BoardGame game) throws BoardGameException {
+        if (game.getTitle().trim().length() * game.getLogo().trim().length() * game.getDescription().trim().length() == 0) {
+            throw new BoardGameException("Empty logo, title or description field!");
+        }
+        if (gameRepo.getFirstByTitle(game.getTitle()) != null) {
+            throw new BoardGameException("Title duplicated!");
+        }
         return gameRepo.save(game);
     }
 

@@ -1,5 +1,6 @@
 package by.vyun.controller;
 
+
 import by.vyun.exception.RegistrationException;
 import by.vyun.model.BoardGame;
 import by.vyun.model.Meeting;
@@ -28,6 +29,27 @@ public class UserRestController {
         User currentUser = userService.getUserById(userId);
         return userService.getUnsubscribedGames(currentUser);
     }
+
+    @GetMapping("/allGameList")
+    @ResponseBody
+    public List<BoardGame> allGameList() {
+
+
+
+        return gameService.getAllGames();
+    }
+
+    @PostMapping("/userGameList")
+    public List<BoardGame> gameList(int userId) {
+        User currentUser = userService.getUserById(userId);
+        return currentUser.getGameCollection();
+    }
+    @GetMapping("/userMeetingList")
+    public List<Meeting> meetingList(int userId) {
+        User currentUser = userService.getUserById(userId);
+        return currentUser.getMeetingSet();
+    }
+
 
     //************************************** USERS CRUD
     @PostMapping("/user")

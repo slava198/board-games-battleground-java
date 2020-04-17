@@ -41,10 +41,10 @@ public class UserService {
     public User registration(User user, String cityName) throws RegistrationException {
 
         if (user.getLogin().trim().length() * user.getPassword().trim().length() * cityName.trim().length() == 0) {
-            throw new RegistrationException("Empty login, password or location field!!!");
+            throw new RegistrationException("Empty login, password or location field!");
         }
         if (userRepo.getFirstByLogin(user.getLogin()) != null) {
-            throw new RegistrationException("Login duplicated!!!");
+            throw new RegistrationException("Login duplicated!");
         }
         user.setCity(cityRepo.getFirstByName(cityName));
         user = userRepo.save(user);
@@ -55,10 +55,10 @@ public class UserService {
     public User signIn(String login, String password) throws RegistrationException {
         User foundedUser = userRepo.getFirstByLogin(login);
         if (foundedUser == null) {
-            throw new RegistrationException("Login not founded!!!");
+            throw new RegistrationException("Login not founded!");
         }
         if (!foundedUser.checkPassword(password)) {
-            throw new RegistrationException("Invalid password!!!");
+            throw new RegistrationException("Invalid password!");
         }
         return foundedUser;
     }

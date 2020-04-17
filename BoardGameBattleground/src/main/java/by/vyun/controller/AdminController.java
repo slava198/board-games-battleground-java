@@ -1,5 +1,7 @@
 package by.vyun.controller;
 
+import by.vyun.exception.BoardGameException;
+import by.vyun.exception.CityException;
 import by.vyun.model.BoardGame;
 import by.vyun.exception.RegistrationException;
 import by.vyun.model.City;
@@ -44,7 +46,15 @@ public class AdminController {
 
     @PostMapping("/add_game")
     public String addGame(BoardGame game, Model model, HttpSession session) {
-        gameService.add(game);
+        try {
+            gameService.add(game);
+        }
+        catch (BoardGameException ex) {
+            model.addAttribute("error", ex.getMessage());
+            return "game_create";
+        }
+
+
         model.addAttribute("user", getCurrentUser());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("games", gameService.getAllGames());
@@ -60,7 +70,13 @@ public class AdminController {
     @PostMapping("/add_city")
     public String addCity(City city, Model model) {
 
-        cityService.add(city);
+        try {
+            cityService.add(city);
+        }
+        catch (CityException ex) {
+            model.addAttribute("error", ex.getMessage());
+            return "city_create";
+        }
         model.addAttribute("user", getCurrentUser());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("games", gameService.getAllGames());
